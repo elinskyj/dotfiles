@@ -4,8 +4,8 @@
 )
 
 (defsrc
-  caps a s d f j k l ;
   esc
+  caps a s d f j k l ;
 )
 
 (defvar
@@ -47,11 +47,11 @@
 )
 
 (deflayer base
-  @escctrl @a @s @d @f @j @k @l @;
   caps
+  @escctrl @a @s @d @f @j @k @l @;
 )
 
 (deflayer nomods
+  (layer-switch base)
   esc a s d f j k l ;
-  caps
 )
