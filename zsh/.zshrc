@@ -36,5 +36,8 @@ setopt hist_find_no_dups
 
 source $ZSH/oh-my-zsh.sh
 
+# ls icons
+alias ls="lsd"
+
 autoload -U add-zsh-hook
 add-zshjook -Uz chpwd () { la; }
