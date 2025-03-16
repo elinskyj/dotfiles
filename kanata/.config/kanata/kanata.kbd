@@ -5,7 +5,11 @@
 
 (defsrc
   esc
-  caps a s d f j k l ;
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (defvar
@@ -35,7 +39,7 @@
     (on-idle-fakekey to-base tap 20)
   )
 
-  escctrl (tap-hold $tap-time $hold-time esc lctl)
+  escnum (tap-hold $tap-time $hold-time esc (layer-while-held num))
   a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
   s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
   d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lsft $left-hand-keys)
@@ -48,10 +52,27 @@
 
 (deflayer base
   caps
-  @escctrl @a @s @d @f @j @k @l @;
+  grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @escnum @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
+  lsft    z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctrl
 )
 
 (deflayer nomods
   (layer-switch base)
-  esc a s d f j k l ;
+  grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc     a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft    z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer num
+  (layer-switch base)
+  _    _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
+  _    _    _    _    _    _    _    kp4  kp5  kp6  -    _    _    _
+  _    _    _    _    _    _    _    kp1  kp2  kp3  +    _    _
+  _    _    _    _    _    _    _    kp0  kp0  .    /    _
+  _    _    _              _              _    _    _
 )
