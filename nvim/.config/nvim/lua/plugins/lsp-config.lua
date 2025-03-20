@@ -9,9 +9,14 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {"lua_ls", "clangd", "cssls", "html"}
+      })
     opts = {
       auto_install = true,
-    },
+    }
+    end
   },
   {
     "neovim/nvim-lspconfig",
@@ -26,17 +31,6 @@ return {
       )
 
       local lspconfig = require("lspconfig")
-
-      lspconfig.tailwindcss.setup({
-        capabilities = capabilities
-      })
-      lspconfig.ruby_lsp.setup({
-        capabilities = capabilities,
-        cmd = { "/home/typecraft/.asdf/shims/ruby-lsp" }
-      })
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities
-      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
