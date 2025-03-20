@@ -11,6 +11,8 @@ alias clr="clear; echo Currently logged in on $TTY, as $USERNAME in directory $P
 # automatically create parent directories if they don't exist
 alias mkdir="mkdir -p"
 
+alias dmesg="sudo dmesg"
+
 # use bat instead of cat
 alias cat="batcat"
 
