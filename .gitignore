@@ -1,2 +1,8 @@
 # for custom aliases with sensitive info
 secrets.zsh
+
+# hyprland
+wallpaper_effects/
+.current_wallpaper
+wallust/
+.initial_startup_done
