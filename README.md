@@ -56,14 +56,14 @@ Navigate to the dotfiles repository and use GNU Stow to apply the configurations
 
 ```bash
 cd ~/dotfiles
-stow zsh
+stow -t $HOME zsh
 ```
 
 This command creates symbolic links for the zsh configuration files in your home directory. Repeat this step for other configurations (e.g., `neovim`, `kitty`, etc.):
 
 ```bash
-stow nvim
-stow kitty
+stow -t $HOME nvim
+stow -t $HOME kitty
 ```
 
 ## Customization
@@ -76,9 +76,9 @@ If you need to remove the symbolic links created by GNU Stow, you can "unstow" t
 
 ```bash
 cd ~/dotfiles
-stow -D zsh
-stow -D nvim
-stow -D kitty
+stow -D -t $HOME zsh
+stow -D -t $HOME nvim
+stow -D -t $HOME kitty
 ```
 
 This will remove the symbolic links, allowing you to revert to your previous configurations.
