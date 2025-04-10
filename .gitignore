@@ -6,3 +6,6 @@ wallpaper_effects/
 .current_wallpaper
 wallust/
 .initial_startup_done
+
+# logs
+*.log
