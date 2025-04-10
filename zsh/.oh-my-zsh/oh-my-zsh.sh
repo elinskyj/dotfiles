@@ -209,7 +209,11 @@ unset plugin
 for config_file ("$ZSH_CUSTOM"/*.zsh(N)); do
   source "$config_file"
 done
+for alias_file ("$ZSH_CUSTOM"/aliases/*.zsh(N)); do
+  source "$alias_file"
+done
 unset config_file
+unset alias_file
 
 # Load the theme
 is_theme() {
