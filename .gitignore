@@ -9,3 +9,5 @@ wallust/
 
 # logs
 *.log
+
+lazy-lock.json
