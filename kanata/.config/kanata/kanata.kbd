@@ -15,6 +15,7 @@
 (defvar
   tap-time 200
   hold-time 150
+  hold-time-slow 200
 
   left-hand-keys (
     q w e r t
@@ -41,14 +42,14 @@
 
   escnum (tap-hold $tap-time $hold-time esc (layer-while-held num))
   capmod (tap-hold $tap-time $hold-time caps (layer-switch nomods))
-  a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
+  a (tap-hold-release-keys $tap-time $hold-time-slow (multi a @tap) lmet $left-hand-keys)
   s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
   d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lsft $left-hand-keys)
   f (tap-hold-release-keys $tap-time $hold-time (multi f @tap) lctl $left-hand-keys)
   j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rctl $right-hand-keys)
   k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rsft $right-hand-keys)
   l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
-  ; (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+  ; (tap-hold-release-keys $tap-time $hold-time-slow (multi ; @tap) rmet $right-hand-keys)
 )
 
 (deflayer base
