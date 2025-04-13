@@ -8,15 +8,17 @@ export BAT_THEME_LIGHT="ansi"
 export BAT_THEME_DARK="Visual Studio Dark+"
 export BAT_THEME="ansi"
 
-ZSH_THEME="risto"
+ZSH_THEME="agnoster"
 
 ENABLE_CORRECTION="true"
 
 plugins=(
 	git
-	colored-man-pages
-	alias-finder
-	command-not-found
+  colored-man-pages
+  docker
+  docker-compose
+  alias-finder
+  command-not-found
 	qrcode
 	sudo
 )
@@ -41,3 +43,9 @@ alias ls="lsd"
 
 autoload -U add-zsh-hook
 add-zshjook -Uz chpwd () { la; }
+
+fastfetch
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
