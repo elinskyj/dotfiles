@@ -1,5 +1,6 @@
-# for custom aliases with sensitive info
+# for custom zsh files with sensitive info
 secrets.zsh
+shortcuts.zsh
 
 # hyprland
 wallpaper_effects/
