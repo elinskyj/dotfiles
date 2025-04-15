@@ -20,3 +20,5 @@ if command -v batcat &> /dev/null; then
     alias cat="cat"
 fi
 
+# fastfetch
+alias ff="fastfetch"
