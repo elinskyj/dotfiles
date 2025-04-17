@@ -21,4 +21,4 @@ if command -v batcat &> /dev/null; then
 fi
 
 # fastfetch
-alias ff="fastfetch"
+alias ff="clear && fastfetch"
