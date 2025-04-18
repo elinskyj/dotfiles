@@ -50,6 +50,8 @@
   k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rsft $right-hand-keys)
   l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
   ; (tap-hold-release-keys $tap-time $hold-time-slow (multi ; @tap) rmet $right-hand-keys)
+  lsft (tap-dance $tap-time (lsft caps))
+  rsft (tap-dance $tap-time (rsft caps))
 )
 
 (deflayer base
@@ -57,7 +59,7 @@
   grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
   @escnum @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
-  lsft    z    x    c    v    b    n    m    ,    .    /    rsft
+  @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
 
@@ -66,15 +68,15 @@
   grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc     a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft    z    x    c    v    b    n    m    ,    .    /    rsft
+  @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (deflayer num
   (layer-switch base)
-  _    _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
-  _    _    _    _    _    _    _    kp4  kp5  kp6  -    _    _    _
-  _    _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
-  _    _    _    _    _    _   end   kp0  kp0  .    /    _
-  _    _    _              _              _    _    _
+  _     _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
+  _     _    _    _    _    _    _    kp4  kp5  kp6  -    _    _    _
+  _     _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
+  @lsft _    _    _    _    _   end   kp0  kp0  .    /    @rsft
+  _     _    _              _              _    _    _
 )
