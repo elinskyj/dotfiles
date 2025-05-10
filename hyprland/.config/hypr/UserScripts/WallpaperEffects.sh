@@ -5,6 +5,7 @@
 # Variables
 current_wallpaper="$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
 wallpaper_output="$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified"
+wallpaper_effect="$HOME/.config/hypr/wallpaper_effects/.wallpaper_effect"
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 
@@ -70,6 +71,7 @@ main() {
 
   # Process user choice
   if [[ -n "$choice" ]]; then
+    echo "${effects[$choice]}" >"$wallpaper_effect"
     if [[ "$choice" == "No Effects" ]]; then
       no-effects
     elif [[ "${effects[$choice]+exists}" ]]; then

@@ -33,6 +33,8 @@ while true; do
     while read -r img; do
       swww img -o $focused_monitor "$img"
       $wallust_refresh
+      sleep 0.5
+      "$SCRIPTSDIR/WallpaperLock.sh"
       sleep $INTERVAL
 
     done

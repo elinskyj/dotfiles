@@ -237,6 +237,8 @@ done
 
 sleep 2
 ${SCRIPTSDIR}/Refresh.sh
+sleep 2
+"$SCRIPTSDIR/WallpaperLock.sh"
 
 sleep 0.3
 # Display notifications for theme and icon changes

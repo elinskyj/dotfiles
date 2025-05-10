@@ -25,3 +25,5 @@ wait $!
 sleep 2
 "$SCRIPTSDIR/Refresh.sh"
 
+sleep 0.5
+"$SCRIPTSDIR/WallpaperLock.sh"

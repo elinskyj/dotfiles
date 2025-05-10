@@ -74,6 +74,8 @@ main() {
     "$SCRIPTSDIR/WallustSwww.sh"
     sleep 0.5
     "$SCRIPTSDIR/Refresh.sh"
+    sleep 0.5
+    "$SCRIPTSDIR/WallpaperLock.sh"
     exit 0
   fi
 
@@ -107,6 +109,8 @@ wait $!
   wait $!
 sleep 2
 "$SCRIPTSDIR/Refresh.sh"
+sleep 0.5
+"$SCRIPTSDIR/WallpaperLock.sh"
 
 sleep 5 # add delay of 5 secords for those who have slow machines
 sddm_sequoia="/usr/share/sddm/themes/sequoia_2"
