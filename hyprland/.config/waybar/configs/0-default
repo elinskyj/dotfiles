@@ -21,6 +21,7 @@
 "margin-right": 8,
 
 "modules-left": [
+  "custom/cava_mviz",
 	"hyprland/window",
 	],
 
