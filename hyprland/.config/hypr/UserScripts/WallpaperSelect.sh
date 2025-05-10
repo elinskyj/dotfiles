@@ -1,5 +1,5 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ 
+# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
 # This script for selecting wallpapers (SUPER W)
 
 # WALLPAPERS PATH
@@ -17,7 +17,7 @@ BEZIER=".43,1.19,1,.4"
 SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
 
 # Check if swaybg is running
-if pidof swaybg > /dev/null; then
+if pidof swaybg >/dev/null; then
   pkill swaybg
 fi
 
@@ -34,13 +34,13 @@ rofi_command="rofi -i -show -dmenu -config ~/.config/rofi/config-wallpaper.rasi"
 menu() {
   # Sort the PICS array
   IFS=$'\n' sorted_options=($(sort <<<"${PICS[*]}"))
-  
+
   # Place ". random" at the beginning with the random picture as an icon
   printf "%s\x00icon\x1f%s\n" "$RANDOM_PIC_NAME" "$RANDOM_PIC"
-  
+
   for pic_path in "${sorted_options[@]}"; do
     pic_name=$(basename "$pic_path")
-    
+
     # Displaying .gif to indicate animated images
     if [[ ! "$pic_name" =~ \.gif$ ]]; then
       printf "%s\x00icon\x1f%s\n" "$(echo "$pic_name" | cut -d. -f1)" "$pic_path"
@@ -56,7 +56,7 @@ swww query || swww-daemon --format xrgb
 # Choice of wallpapers
 main() {
   choice=$(menu | $rofi_command)
-  
+
   # Trim any potential whitespace or hidden characters
   choice=$(echo "$choice" | xargs)
   RANDOM_PIC_NAME=$(echo "$RANDOM_PIC_NAME" | xargs)
@@ -69,7 +69,7 @@ main() {
 
   # Random choice case
   if [[ "$choice" == "$RANDOM_PIC_NAME" ]]; then
-	swww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS;
+    swww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS
     sleep 2
     "$SCRIPTSDIR/WallustSwww.sh"
     sleep 0.5
@@ -96,7 +96,7 @@ main() {
 }
 
 # Check if rofi is already running
-if pidof rofi > /dev/null; then
+if pidof rofi >/dev/null; then
   pkill rofi
 fi
 
@@ -104,30 +104,29 @@ main
 
 wait $!
 "$SCRIPTSDIR/WallustSwww.sh" &&
-
-wait $!
+  wait $!
 sleep 2
 "$SCRIPTSDIR/Refresh.sh"
 
 sleep 5 # add delay of 5 secords for those who have slow machines
 sddm_sequoia="/usr/share/sddm/themes/sequoia_2"
 if [ -d "$sddm_sequoia" ]; then
-    notify-send -i "$iDIR/picture.png" "Set wallpaper" "as SDDM background?" \
-        -t 10000 \
-        -A "yes=Yes" \
-        -A "no=No" \
-        -h string:x-canonical-private-synchronous:wallpaper-notify
+  notify-send -i "$iDIR/picture.png" "Set wallpaper" "as SDDM background?" \
+    -t 10000 \
+    -A "yes=Yes" \
+    -A "no=No" \
+    -h string:x-canonical-private-synchronous:wallpaper-notify
 
-    # Wait for user input using a background process
-    dbus-monitor "interface='org.freedesktop.Notifications',member='ActionInvoked'" |
+  # Wait for user input using a background process
+  dbus-monitor "interface='org.freedesktop.Notifications',member='ActionInvoked'" |
     while read -r line; do
-        if echo "$line" | grep -q "yes"; then
-            # User chose "Yes", copy the wallpaper with correct syntax
-            pkexec /usr/bin/cp -r "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current" "$sddm_sequoia/backgrounds/default"
-            notify-send -i "$iDIR/picture.png" "SDDM" "Background SET"
-            break
-        elif echo "$line" | grep -q "no"; then
-            break
-        fi
+      if echo "$line" | grep -q "yes"; then
+        # User chose "Yes", copy the wallpaper with correct syntax
+        pkexec /usr/bin/cp -r "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current" "$sddm_sequoia/backgrounds/default"
+        notify-send -i "$iDIR/picture.png" "SDDM" "Background SET"
+        break
+      elif echo "$line" | grep -q "no"; then
+        break
+      fi
     done &
 fi
