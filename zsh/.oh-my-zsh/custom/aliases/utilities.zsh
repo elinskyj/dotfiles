@@ -9,7 +9,7 @@ alias unstow="stow -D"
 alias vi="nvim"
 
 # tmux
-alias t="tmux"
+alias t="tmux attach\; choose-tree -wZ || tmux new-session"
 
 # use batcat on debian or bat on other systems instead of cat
 if command -v batcat &> /dev/null; then
