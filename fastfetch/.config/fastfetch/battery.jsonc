@@ -1,0 +1,15 @@
+{
+  "logo": {
+    "type": "none",
+  },
+  "display": {
+    "separator": "  ",
+    "key": {
+      "type": "icon",
+      "paddingLeft": 2
+    }
+  },
+  "modules": [
+    "battery" 
+  ],
+}
