@@ -68,7 +68,7 @@ stow -t $HOME kitty
 
 ## Customization
 
-Feel free to customize the dotfiles to suit your preferences. Any changes you make to the files in the repository will be reflected when you stow the configurations again.
+Feel free to customize the dotfiles in the repository to suit your preferences. Since Stow uses symlinks, any changes made to the repository files are instantly reflected in the linked locations
 
 ## Unstowing Dotfiles
 
