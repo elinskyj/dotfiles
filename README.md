@@ -1,10 +1,14 @@
 # My Dotfiles
 
 This repository contains my personal dotfiles for configuring various applications and environments. Using these dotfiles, you can quickly set up a new machine with my preferred configurations.
+<div align="center">
+  <img alt="tmux screenshot" src="./assets/tmux.png" width="960px" />
+</div>
 
 ## Prerequisites
 
 To use these dotfiles, you need to have the following installed on your machine:
+
 - [Git](https://git-scm.com/)
 - [GNU Stow](https://www.gnu.org/software/stow/)
 
@@ -36,16 +40,19 @@ GNU Stow is a symlink manager that simplifies the management of dotfiles. It all
 If you don't have GNU Stow installed, you can install it using your package manager:
 
 - **For macOS (using Homebrew):**
+
     ```bash
     brew install stow
     ```
 
 - **For Debian-based systems (e.g., Ubuntu):**
+
     ```bash
     sudo apt install stow
     ```
 
 - **For Red Hat-based systems (e.g., Fedora):**
+
     ```bash
     sudo dnf install stow
     ```
