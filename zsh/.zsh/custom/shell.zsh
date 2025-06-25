@@ -1,6 +1,6 @@
 # Editor shortcuts
 alias zshrc="${EDITOR:-vi} ~/.zshrc"
-alias aliases="${EDITOR:-vi} ~/.oh-my-zsh/custom/"
+alias aliases="${EDITOR:-vi} $ZSH_CUSTOM"
 
 # search aliases (ag [partial command or alias])
 alias ag="alias | grep"
