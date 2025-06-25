@@ -1,8 +1,16 @@
 # uncomment the next line for debug mode
 # set -x
 
+# initialize oh-my-zsh if it's not already installed
+if [[ ! -e "$HOME/dotfiles/zsh/.oh-my-zsh" ]]; then
+  git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/dotfiles/zsh/.oh-my-zsh"
+  chmod +x "$HOME/dotfiles/zsh/.oh-my-zsh/oh-my-zsh.sh"
+  ln -s "$HOME/dotfiles/zsh/" "$HOME"
+fi
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$HOME/.zsh/custom"
 export EDITOR=nvim
 export BAT_THEME_LIGHT="ansi"
 export BAT_THEME_DARK="Visual Studio Dark+"
