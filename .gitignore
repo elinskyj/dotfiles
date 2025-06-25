@@ -2,6 +2,9 @@
 secrets.zsh
 shortcuts.zsh
 
+# oh-my-zsh is cloned when .zshrc is sourced
+.oh-my-zsh/
+
 # hyprland
 wallpaper_effects/
 .current_wallpaper
