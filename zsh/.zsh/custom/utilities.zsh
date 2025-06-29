@@ -9,7 +9,7 @@ alias unstow="stow -D"
 alias vi="nvim"
 
 # tmux
-alias t="tmux attach\; choose-tree -wZ || tmux new-session"
+alias t=tmux_auto
 
 # disk usage
 alias duhs="du -hx | sort -hr | less"

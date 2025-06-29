@@ -56,8 +56,18 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-if command -v tmux &> /dev/null && [[ -z "$TMUX" ]]; then
-  tmux attach\; choose-tree -wZ || tmux new-session
-fi
+tmux_auto() {
+  if command -v tmux &> /dev/null && [[ -z "$TMUX" ]]; then
+    session_count=$(tmux list-sessions 2>/dev/null | wc -l)
+    if [[ "$session_count" -eq 1 ]]; then
+      tmux attach
+    elif [[ "$session_count" -gt 1 ]]; then
+      tmux attach\; choose-tree -wZ
+    else
+      tmux new-session
+    fi
+  fi
+}
 
+tmux_auto
 fastfetch
