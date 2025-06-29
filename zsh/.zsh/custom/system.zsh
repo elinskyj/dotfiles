@@ -11,5 +11,7 @@ alias find="fzf -m --preview=\"batcat --color=always {}\" --bind \"enter:become(
 # kitty ssh
 alias s="kitten ssh"
 
+alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
+
 alias q="exit"
 
