@@ -2,6 +2,9 @@
 alias themel="~/.oh-my-zsh/tools/theme_chooser.sh -l | less"
 alias themes="~/.oh-my-zsh/tools/theme_chooser.sh -s | less"
 
+# wallust palette
+alias palette="wallust run -sT \"$HOME/.config/hypr/wallpaper_effects/.wallpaper_current\""
+
 # GNU Stow
 alias unstow="stow -D"
 
