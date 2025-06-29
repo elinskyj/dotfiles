@@ -11,12 +11,12 @@ wallpaper_effects/
 .initial_startup_done
 
 # wallust generated files
-cava/config
+hyprland/.config/cava/config
 wallust-hyprland.conf
-rofi/wallust/colors-rofi.rasi
-waybar/wallust/colors-waybar.css
+hyprland/.config/rofi/wallust/colors-rofi.rasi
+hyprland/.config/waybar/wallust/colors-waybar.css
 kitty-colors.conf
-lsd/colors.yaml
+lsd/.config/lsd/colors.yaml
 
 # logs
 *.log
