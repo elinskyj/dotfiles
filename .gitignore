@@ -8,8 +8,15 @@ shortcuts.zsh
 # hyprland
 wallpaper_effects/
 .current_wallpaper
-wallust/
 .initial_startup_done
+
+# wallust generated files
+cava/config
+wallust-hyprland.conf
+rofi/wallust/colors-rofi.rasi
+waybar/wallust/colors-waybar.css
+kitty-colors.conf
+lsd/colors.yaml
 
 # logs
 *.log

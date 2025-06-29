@@ -1,5 +1,5 @@
-user: "#cba6f7"
-group: "#b4befe"
+user: "{{color5}}"
+group: "{{color10}}"
 permission:
   read: "#a6e3a1"
   write: "#f9e2af"
@@ -8,11 +8,11 @@ permission:
   no-access: "#a6adc8"
   octal: "#94e2d5"
   acl: "#94e2d5"
-  context: "#89dceb"
+  context: "{{color0}}"
 date:
-  hour-old: "#94e2d5"
-  day-old: "#89dceb"
-  older: "#74c7ec"
+  hour-old: "{{foreground}}"
+  day-old: "{{color15}}"
+  older: "{{color14}}"
 size:
   none: "#a6adc8"
   small: "#a6e3a1"

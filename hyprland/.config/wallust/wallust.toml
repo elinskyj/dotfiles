@@ -49,6 +49,9 @@ waybar.target = '~/.config/waybar/wallust/colors-waybar.css'
 kitty.template = 'colors-kitty.conf'
 kitty.target = '~/.config/kitty/kitty-colors.conf'
 
+lsd.template = 'colors-lsd.yaml'
+lsd.target = '~/.config/lsd/colors.yaml'
+
 #swaync.template = 'colors-swaync.css'
 #swaync.target = '~/.config/swaync/wallust/colors-wallust.css'
 
