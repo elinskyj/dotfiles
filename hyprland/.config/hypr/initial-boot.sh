@@ -22,46 +22,47 @@ effect="--transition-bezier .43,1.19,1,.4 --transition-fps 30 --transition-type 
 
 # Check if a marker file exists.
 if [ ! -f ~/.config/hypr/.initial_startup_done ]; then
-    sleep 1
-    # Initialize wallust and wallpaper
-	if [ -f "$wallpaper" ]; then
-		wallust run -s $wallpaper > /dev/null 
-		swww query || swww-daemon && $swww $wallpaper $effect
-	    "$scriptsDir/WallustSwww.sh" > /dev/null 2>&1 & 
-	fi
-     
-    # initiate GTK dark mode and apply icon and cursor theme
-    gsettings set org.gnome.desktop.interface color-scheme $color_scheme > /dev/null 2>&1 &
-    gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme > /dev/null 2>&1 &
-    gsettings set org.gnome.desktop.interface icon-theme $icon_theme > /dev/null 2>&1 &
-    gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme > /dev/null 2>&1 &
-    gsettings set org.gnome.desktop.interface cursor-size 24 > /dev/null 2>&1 &
+  sleep 1
+  # Initialize wallust and wallpaper
+  if [ -f "$wallpaper" ]; then
+    wallust run $wallpaper >/dev/null
+    swww query || swww-daemon && $swww $wallpaper $effect
+    "$scriptsDir/WallustSwww.sh" >/dev/null 2>&1 &
+  fi
 
-     # NIXOS initiate GTK dark mode and apply icon and cursor theme
-	if [ -n "$(grep -i nixos < /etc/os-release)" ]; then
-      gsettings set org.gnome.desktop.interface color-scheme "'$color_scheme'" > /dev/null 2>&1 &
-      dconf write /org/gnome/desktop/interface/gtk-theme "'$gtk_theme'" > /dev/null 2>&1 &
-      dconf write /org/gnome/desktop/interface/icon-theme "'$icon_theme'" > /dev/null 2>&1 &
-      dconf write /org/gnome/desktop/interface/cursor-theme "'$cursor_theme'" > /dev/null 2>&1 &
-      dconf write /org/gnome/desktop/interface/cursor-size "24" > /dev/null 2>&1 &
-	fi
-       
-    # initiate kvantum theme
-    kvantummanager --set "$kvantum_theme" > /dev/null 2>&1 &
+  # initiate GTK dark mode and apply icon and cursor theme
+  gsettings set org.gnome.desktop.interface color-scheme $color_scheme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface icon-theme $icon_theme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface cursor-size 24 >/dev/null 2>&1 &
 
-    # initiate the kb_layout (for some reason) waybar cant launch it
-    "$scriptsDir/SwitchKeyboardLayout.sh" > /dev/null 2>&1 &
+  # NIXOS initiate GTK dark mode and apply icon and cursor theme
+  if [ -n "$(grep -i nixos </etc/os-release)" ]; then
+    gsettings set org.gnome.desktop.interface color-scheme "'$color_scheme'" >/dev/null 2>&1 &
+    dconf write /org/gnome/desktop/interface/gtk-theme "'$gtk_theme'" >/dev/null 2>&1 &
+    dconf write /org/gnome/desktop/interface/icon-theme "'$icon_theme'" >/dev/null 2>&1 &
+    dconf write /org/gnome/desktop/interface/cursor-theme "'$cursor_theme'" >/dev/null 2>&1 &
+    dconf write /org/gnome/desktop/interface/cursor-size "24" >/dev/null 2>&1 &
+  fi
 
-    # Initial waybar style
-	if [ -f "$waybar_style" ]; then
-    	ln -sf "$waybar_style" "$HOME/.config/waybar/style.css"
+  # initiate kvantum theme
+  kvantummanager --set "$kvantum_theme" >/dev/null 2>&1 &
 
-		# Refreshing waybar, swaync, rofi etc. 
-		"$scriptsDir/Refresh.sh" > /dev/null 2>&1 & 
-	fi
+  # initiate the kb_layout (for some reason) waybar cant launch it
+  "$scriptsDir/SwitchKeyboardLayout.sh" >/dev/null 2>&1 &
 
-    # Create a marker file to indicate that the script has been executed.
-    touch ~/.config/hypr/.initial_startup_done
+  # Initial waybar style
+  if [ -f "$waybar_style" ]; then
+    ln -sf "$waybar_style" "$HOME/.config/waybar/style.css"
 
-    exit
+    # Refreshing waybar, swaync, rofi etc.
+    "$scriptsDir/Refresh.sh" >/dev/null 2>&1 &
+  fi
+
+  # Create a marker file to indicate that the script has been executed.
+  touch ~/.config/hypr/.initial_startup_done
+
+  exit
 fi
+

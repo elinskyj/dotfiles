@@ -48,7 +48,7 @@ no-effects() {
     # Wait for swww command to complete
     wait $!
   # Run other commands after swww
-  wallust run "$current_wallpaper" -s &&
+  wallust run "$current_wallpaper" &&
     wait $!
   # Refresh rofi, waybar, wallust palettes
   sleep 2
@@ -81,7 +81,7 @@ main() {
       # Wait for effects to be applied
       sleep 1
       # Wait for other commands to finish
-      wallust run "$wallpaper_output" -s &
+      wallust run "$wallpaper_output" &
       # Wait for other commands to finish
       sleep 0.5
       # Refresh rofi, waybar, wallust palettes
