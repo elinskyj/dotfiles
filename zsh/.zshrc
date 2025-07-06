@@ -2,11 +2,19 @@
 # set -x
 
 # initialize oh-my-zsh if it's not already installed
+setopt dotglob
 if [[ ! -e "$HOME/dotfiles/zsh/.oh-my-zsh" ]]; then
   git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/dotfiles/zsh/.oh-my-zsh"
   chmod +x "$HOME/dotfiles/zsh/.oh-my-zsh/oh-my-zsh.sh"
-  ln -s "$HOME/dotfiles/zsh/" "$HOME"
+
+  for item in "$HOME/dotfiles/zsh/"*; do
+    target="$HOME/$(basename "$item")"
+    if [[ ! -e "$target" ]]; then
+      ln -s "$item" "$target"
+    fi
+  done
 fi
+setopt dotglob
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
