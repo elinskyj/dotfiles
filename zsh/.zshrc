@@ -23,6 +23,10 @@ export EDITOR=nvim
 export BAT_THEME_LIGHT="ansi"
 export BAT_THEME_DARK="Visual Studio Dark+"
 export BAT_THEME="ansi"
+export PATH="$PATH:/snap/bin"
+source <(/usr/bin/dstask zsh-completion)
+export PATH="$PATH:/snap/bin"
+source <(/usr/bin/dstask zsh-completion)
 
 ZSH_THEME="agnoster"
 
