@@ -40,6 +40,10 @@
     (on-idle-fakekey to-base tap 20)
   )
 
+  lsn (layer-switch num)
+  lsb (layer-switch base)
+
+  escbase (multi esc (on-idle-fakekey to-base tap 20))
   escnum (tap-hold $tap-time $hold-time esc (layer-while-held num))
   capmod (tap-hold $tap-time $hold-time caps (layer-switch nomods))
   a (tap-hold-release-keys $tap-time $hold-time-slow (multi a @tap) lmet $left-hand-keys)
@@ -64,7 +68,7 @@
 )
 
 (deflayer nomods
-  (layer-switch base)
+  @lsb
   grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc     a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -73,10 +77,10 @@
 )
 
 (deflayer num
-  (layer-switch base)
-  _     _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
-  _     _    _    _    _    _    _    kp4  kp5  kp6  -    _    _    _
-  _     _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
-  @lsft _    _    _    _    _   end   kp0  kp0  .    /    @rsft
-  _     _    _              _              _    _    _
+  @lsb
+  _        _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
+  _        _    _    _    _    _   @lsn  kp4  kp5  kp6  -    _    _    _
+  @escbase _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
+  @lsft    _    _    _    _    _    end  kp0  kp0  .    /    @rsft
+  _        _    _              _              _    _    _
 )
