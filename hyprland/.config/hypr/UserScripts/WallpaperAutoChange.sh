@@ -9,6 +9,8 @@
 
 wallust_refresh=$HOME/.config/hypr/scripts/RefreshNoWaybar.sh
 
+SCRIPTSDIR="$HOME/.config/hypr/scripts"
+
 focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 
 if [[ $# -lt 1 ]] || [[ ! -d $1 ]]; then
@@ -26,6 +28,7 @@ INTERVAL=1800
 
 while true; do
   find "$1" |
+    grep -Ev archive |
     while read -r img; do
       echo "$((RANDOM % 1000)):$img"
     done |
