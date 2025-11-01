@@ -9,6 +9,9 @@ backend = "kmeans"
 # lab - labmixed - lch - lchmixed
 color_space = "labmixed"
 
+# Ensure readable contrast
+check_contrast = true
+
 # NOTE: All filters will fill 16 colors (from color0 to color15), 16 color
 #       variations are the 'ilusion' of more colors by opaquing color1 to color5.
 # Use the most prominent colors in a way that makes sense, a scheme:
