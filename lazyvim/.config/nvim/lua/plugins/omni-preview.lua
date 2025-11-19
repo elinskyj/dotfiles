@@ -8,6 +8,7 @@ return {
   dependencies = {
     {
       "chomosuke/typst-preview.nvim",
+      "iamcco/markdown-preview.nvim",
       lazy = true,
     },
   },
