@@ -39,6 +39,7 @@ plugins=(
   command-not-found
 	qrcode
 	sudo
+  zsh-fzf-history-search
 )
 
 # History
