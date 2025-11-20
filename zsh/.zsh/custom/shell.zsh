@@ -13,6 +13,14 @@ ag() {
   eval $(alias | fzf --border --prompt='Select alias to run: ' -1 -q " $@" | cut -d'=' -f1)
 }
 
+# edit dotfiles
+dote() {
+   find ~/dotfiles -type f -not -path '*/.git/*' -not -name '.' -not -name '..'\
+  | fzf --preview="batcat {} --color always" --cycle --border -m\
+      --prompt="Select dotfile to edit: " --header="Dotfiles in ~/dotfiles"\
+      --bind "change:unbind(one),enter:become(${EDITOR:-vi} {+}),one:become(${EDITOR:-vi} {+})" -q " $@"
+}
+
 fzf-man-widget() {
   manpage="echo {} | sed 's/\([[:alnum:][:punct:]]*\) (\([[:alnum:]]*\)).*/\2 \1/'"
   batman="${manpage} | xargs -r man | col -bx | batcat --language=man --plain --color always --theme=\"Monokai Extended\""
