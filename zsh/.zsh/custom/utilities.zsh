@@ -19,10 +19,13 @@ alias duhs="du -hx | sort -hr | less"
 
 # use batcat on debian or bat on other systems instead of cat
 if command -v batcat &> /dev/null; then
+    CATCOMMAND=batcat
     alias cat="batcat"
   elif command -v bat &> /dev/null; then
+    CATCOMMAND=bat
     alias cat="bat"
   else
+    CATCOMMAND=cat
     alias cat="cat"
 fi
 
