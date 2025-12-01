@@ -45,7 +45,6 @@ fzf-man-widget() {
       --bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(ﳁ TLDR > )"
   zle reset-prompt
 }
-# `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
-bindkey '^h' fzf-man-widget
+# `Ctrl-Alt-h` keybinding to launch the widget
+bindkey '^[^h' fzf-man-widget
 zle -N fzf-man-widget
-# Icon used is nerdfont
