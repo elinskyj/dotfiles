@@ -1,3 +1,5 @@
+dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
+
 task() {
   if [[ $@ == "" ]]; then
       /usr/bin/dstask show-open
@@ -26,6 +28,7 @@ tp() {
 # context
 tc() {task context "$@" && task}
 tcd() {tc -office -lisp -cad}
+tcdue() {tc due.before:$(date -d 'now + '$dstask_due_offset +%F)}
 tcp() {tc -office -lisp -cad project:"$@"}
 tco() {tc +office}
 tcn() {tc none}
