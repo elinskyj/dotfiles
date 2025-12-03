@@ -1,0 +1,23 @@
+alias ta='task-add'
+alias tap='task-add-project'
+alias te='task-edit'
+alias tm='task-modify'
+alias tn='task-note'
+alias ts='task-start'
+alias tst='task-stop'
+alias td='task-done'
+alias trm='task-remove'
+alias tl='task-log'
+alias tp='task-projects'
+
+# context
+alias tc='task-context'
+alias tcd='task-context-default'
+alias tcdue='task-context-due'
+alias tcp='task-context-project'
+alias tco='task-context-office'
+alias tcn='task-context-none'
+
+# fzf integration
+alias tg='task-search'
+alias tgp='task-search-project'
