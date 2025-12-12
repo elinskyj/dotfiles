@@ -57,6 +57,7 @@ task-search() {
       --with-nth=2..3 \
       --exact \
       --multi \
+      --select-1 \
       --preview 'echo "Notes:\n"{5}' \
       --preview-window='up:wrap,<5(right,wrap)' \
       --preview-label-pos=1:top \
