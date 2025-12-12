@@ -7,8 +7,10 @@ task() {
       /usr/bin/dstask "$@"
   fi
 }
+tasklist=$(task)
 task-add() {task add "$@" && task}
 task-add-project() {taskwrap add-project "$@"}
+task-add-template() {taskwrap add-template "$@"}
 task-edit() {taskwrap edit "$@"}
 task-modify() {taskwrap modify "$@"}
 task-note() {taskwrap note "$@"}
@@ -24,6 +26,13 @@ task-projects() {
     task project:"$@"
   fi
 }
+task-templates() {
+  if [[ $@ == "" ]]; then
+    task show-templates
+  else
+    task template "$@"
+  fi
+}
 
 # context
 task-context() {task context "$@" && task}
@@ -37,8 +46,7 @@ task-context-none() {task-context none}
 task-search() {
   local task_id
   task_id=$(\
-    task \
-    | jq '.[] | "\(.id)\t\(.project)\t\(.summary)\t\(.due)\t\(.notes)"' \
+    jq '.[] | "\(.id)\t\(.project)\t\(.summary)\t\(.due)\t\(.notes)"' <<<"$tasklist" \
     | sed -e 's/\"\(.*\)"/\1/' -e 's/\\t/\t/g' \
     | fzf \
       --border=rounded \
@@ -55,6 +63,7 @@ task-search() {
       --bind 'focus:transform-preview-label:echo \|\|Project: {2} \| Summary: {3} \| Due: $(date -d {4} +%a\ %D)\|\|' \
     | sed 's/^\([0-9]*\).*/\1/'\
   )
+  tasklist=$(task)
   if [[ -n $task_id ]]; then
     echo "$task_id"
   fi
@@ -74,15 +83,24 @@ task-search-project() {
 
 taskwrap() {
   local subcommand=$1
+  local defsearch=1
+  tasklist=$(task)
   shift
 
   if [[ $# -eq 0 ]]; then
     case $subcommand in
       add-project)
-        print -z "task-add-project $(task-search-project) " ;;
+        local defsearch=0
+        print -z "task-add-project '$(task-search-project)' " ;;
+      add-template)
+        local defsearch=0
+        taskcommand="duplicate"
+        tasklist="$(task show-templates)"
+        print -z "task add template:$(task-search) " ;;
       edit)
         taskcommand="edit" ;;
       modify)
+        local defsearch=0
         taskcommand="modify details"
         print -z "task-modify $(task-search) " ;;
       note)
@@ -90,6 +108,7 @@ taskwrap() {
       start)
         taskcommand="start" ;;
       stop)
+        tasklist="$(task show-active)"
         taskcommand="stop" ;;
       done)
         taskcommand="mark done" ;;
@@ -98,12 +117,17 @@ taskwrap() {
       *)
         taskcommand="" ;;
     esac
-    if [[ $subcommand != "modify" && $subcommand != "add-project" ]]; then
-      task $subcommand $(task-search) && task
+    if [[ $defsearch == 1 ]]; then
+      task $subcommand $(task-search)
     fi
+    task
+    
   else
     case $subcommand in
       add-project) task add project:"$@" && task ;;
+      add-template)
+        tasklist="$(task show-templates)"
+        print -z "task add "$@" template:$(task-search) " ;;
       *) task $subcommand "$@" && task ;;
     esac
   fi
