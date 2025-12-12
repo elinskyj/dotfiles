@@ -58,7 +58,7 @@ task-search() {
       --exact \
       --multi \
       --preview 'echo "Notes:\n"{5}' \
-      --preview-window=up:wrap \
+      --preview-window='up:wrap,<5(right,wrap)' \
       --preview-label-pos=1:top \
       --bind 'focus:transform-preview-label:echo \|\|Project: {2} \| Summary: {3} \| Due: $(date -d {4} +%a\ %D)\|\|' \
     | sed 's/^\([0-9]*\).*/\1/'\
