@@ -134,3 +134,16 @@ taskwrap() {
   fi
 }
 
+check_id() {
+  local id="$1"
+  local ids
+  ids="$(jq -r '.[].id' <<<"$(tcn && task show-templates)")"
+
+  if grep -qxF "$id" <<<"$ids"; then
+    echo "ID '$id' exists in the list."
+    return 0
+  else
+    echo "ID '$id' not found."
+    return 1
+  fi
+}
