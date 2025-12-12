@@ -1,10 +1,11 @@
 dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
+dstaskbin="$(which dstask)"
 
 task() {
   if [[ $@ == "" ]]; then
-      /usr/bin/dstask show-open
+      $dstaskbin show-open
   else
-      /usr/bin/dstask "$@"
+      $dstaskbin "$@"
   fi
 }
 tasklist=$(task)
@@ -122,7 +123,7 @@ taskwrap() {
       task $subcommand $(task-search)
     fi
     task
-    
+
   else
     case $subcommand in
       add-project) task add project:"$@" && task ;;
