@@ -80,6 +80,7 @@ task-search-project() {
     --height ~40% \
     --layout=reverse \
     --exact \
+    --bind enter:accept-or-print-query \
     --tmux
   }
 
