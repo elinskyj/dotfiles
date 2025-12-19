@@ -62,6 +62,7 @@ task-search() {
       --preview-window='up:wrap,<5(right,wrap)' \
       --preview-label-pos=1:top \
       --bind 'focus:transform-preview-label:echo \|\|Project: {2} \| Summary: {3} \| Due: $(date -d {4} +%a\ %D)\|\|' \
+      --query="$@" \
     | sed 's/^\([0-9]*\).*/\1/'\
   )
   tasklist=$(task)
