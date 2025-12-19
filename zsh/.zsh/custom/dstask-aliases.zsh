@@ -18,7 +18,7 @@ alias tcd='task-context-default'
 alias tcdue='task-context-due'
 alias tcp='task-context-project'
 alias tco='task-context-office'
-alias tcn='task-context-none'
+alias tcn='task-context none'
 
 # fzf integration
 alias tg='task-search'

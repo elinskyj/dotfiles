@@ -37,11 +37,10 @@ task-templates() {
 
 # context
 task-context() {task context "$@" && task}
-task-context-default() {task-context -office -lisp -cad}
-task-context-due() {task-context due.before:$(date -d 'now + '$dstask_due_offset +%F)}
-task-context-project() {task-context -office -lisp -cad project:"$@"}
-task-context-office() {task-context +office}
-task-context-none() {task-context none}
+task-context-default() {task-context -office -lisp -cad "$@"}
+task-context-due() {task-context due.before:$(date -d 'now + '$dstask_due_offset +%F) "$@"}
+task-context-project() {task-context-default project:"$@"}
+task-context-office() {task-context +office "$@"}
 
 #fzf integration
 task-search() {
