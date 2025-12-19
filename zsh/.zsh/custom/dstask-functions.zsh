@@ -9,6 +9,7 @@ task() {
   fi
 }
 tasklist=$(task)
+
 task-add() {task add "$@" && task}
 task-add-project() {taskwrap add-project "$@"}
 task-add-template() {taskwrap add-template "$@"}
@@ -33,6 +34,13 @@ task-templates() {
   else
     task template "$@"
   fi
+}
+task-tags() {
+  local old_task_context=$(task context)
+  task context none
+  local task_tags=$(task show-tags)
+  task context "$old_task_context"
+  echo "$task_tags"
 }
 
 # context
@@ -79,6 +87,19 @@ task-search-project() {
     --height ~40% \
     --layout=reverse \
     --exact \
+    --bind enter:accept-or-print-query \
+    --tmux
+  }
+
+task-search-tags() {
+  task-tags \
+    | fzf \
+    --border=rounded \
+    --prompt="Select tags: " \
+    --height ~40% \
+    --layout=reverse \
+    --exact \
+    --multi \
     --bind enter:accept-or-print-query \
     --tmux
   }
