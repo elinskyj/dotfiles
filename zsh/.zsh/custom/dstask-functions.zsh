@@ -71,8 +71,7 @@ task-search() {
 }
 
 task-search-project() {
-  task-projects \
-    | jq -r '.[].name' \
+  jq -r '.[].name' <<< $(task-projects)\
     | fzf \
     --border=rounded \
     --prompt="Select project: " \
