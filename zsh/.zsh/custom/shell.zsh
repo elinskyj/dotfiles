@@ -29,6 +29,23 @@ ag() {
   setopt correct
 }
 
+cdr() {
+  local dir=$(
+    dirs -v \
+    | fzf \
+      --height ~40% \
+      --border \
+      --reverse \
+      --prompt="Select directory: " \
+      --bind "one:accept" \
+      --query " $@" \
+    | awk '{print $2}'
+  )
+  if [ -n "$dir" ]; then
+    eval $dir || return
+  fi
+}
+
 # edit dotfiles
 dote() {
   unsetopt correct
