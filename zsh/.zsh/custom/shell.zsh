@@ -1,5 +1,6 @@
 # Editor shortcuts
 alias zshrc="${EDITOR:-vi} ~/.zshrc"
+alias so="source ~/.zshrc"
 
 # edit aliases in $ZSH_CUSTOM
 ae() {
