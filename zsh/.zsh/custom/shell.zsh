@@ -15,7 +15,7 @@ ae() {
     --with-nth=6 \
     --prompt="Select alias(es) to edit: " \
     --header="Aliases in $ZSH_CUSTOM"\
-    --bind "change:unbind(one),enter:become(${EDITOR:-vi} {+}),one:become(${EDITOR:-vi} {+})" \
+    --bind "enter:become(${EDITOR:-vi} {+}),one:become(${EDITOR:-vi} {+})" \
     --preview="$CATCOMMAND {}" \
     --preview-window=bottom \
     --query " $@"
@@ -42,7 +42,7 @@ dote() {
     --with-nth=5.. \
     --prompt="Select dotfile(s) to edit: " \
     --header="Dotfiles in $HOME/dotfiles"\
-    --bind "change:unbind(one),enter:become(${EDITOR:-vi} {+}),one:become(${EDITOR:-vi} {+})" \
+    --bind "enter:become(${EDITOR:-vi} {+}),one:become(${EDITOR:-vi} {+})" \
     --preview="$CATCOMMAND {}" \
     --preview-window=bottom \
     --query " $@"
