@@ -57,10 +57,10 @@ task-search() {
     jq '.[] | "\(.id)\t\(.project)\t\(.summary)\t\(.due)\t\(.notes)"' <<<"$tasklist" \
     | sed -e 's/\"\(.*\)"/\1/' -e 's/\\t/\t/g' \
     | fzf \
-      --border=rounded \
+      --border \
       --prompt="Select task to $taskcommand: " \
       --height ~40% \
-      --layout=reverse \
+      --reverse \
       --delimiter='\t' \
       --with-nth=2..3 \
       --exact \
@@ -82,26 +82,26 @@ task-search() {
 task-search-project() {
   jq -r '.[].name' <<< $(task-projects)\
     | fzf \
-    --border=rounded \
-    --prompt="Select project: " \
-    --height ~40% \
-    --layout=reverse \
-    --exact \
-    --bind enter:accept-or-print-query \
-    --tmux
+      --border \
+      --prompt="Select project: " \
+      --height ~40% \
+      --reverse \
+      --exact \
+      --bind enter:accept-or-print-query \
+      --tmux
   }
 
 task-search-tags() {
   task-tags \
     | fzf \
-    --border=rounded \
-    --prompt="Select tags: " \
-    --height ~40% \
-    --layout=reverse \
-    --exact \
-    --multi \
-    --bind enter:accept-or-print-query \
-    --tmux
+      --border \
+      --prompt="Select tags: " \
+      --height ~40% \
+      --reverse \
+      --exact \
+      --multi \
+      --bind enter:accept-or-print-query \
+      --tmux
   }
 
 taskwrap() {
