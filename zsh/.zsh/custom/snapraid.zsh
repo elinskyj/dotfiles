@@ -1,6 +1,6 @@
 alias srrconf="sudoedit /root/snapraid-runner/snapraid-runner.conf"
 alias srlog="tail -n35 /var/log/snapraid.log"
-alias srconf="sudo ${EDITOR:-vi} /etc/snapraid.conf"
+alias srconf="sudoedit /etc/snapraid.conf"
 alias srstat="sudo snapraid status"
 alias srdiff="sudo snapraid diff"
 alias srsync="sudo snapraid sync"
