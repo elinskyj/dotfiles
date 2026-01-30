@@ -75,7 +75,8 @@ set_waybar_style() {
 }
 
 # Call the function after determining the mode
-set_waybar_style "$next_mode"
+waybar_style_toggle="$HOME/.cache/.waybar_auto_theme"
+[[ ! -e "$waybar_style_toggle" || "$(\cat "$waybar_style_toggle")" = "True" ]] && set_waybar_style "$next_mode"
 notify_user "$next_mode"
 
 # swaync color change
