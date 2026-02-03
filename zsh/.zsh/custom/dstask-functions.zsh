@@ -1,3 +1,4 @@
+FZF_DSTASK_DEFAULT_OPTS=("--border" "--height=~40%" "--reverse" "--exact" "--multi")
 dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
 due_date=$(date -d 'now + '$dstask_due_offset +%F)
 dstaskbin="$(which dstask)"
@@ -58,14 +59,10 @@ task-search() {
     jq '.[] | "\(.id)\t\(.project)\t\(.summary)\t\(.due)\t\(.notes)"' <<<"$tasklist" \
     | sed -e 's/\"\(.*\)"/\1/' -e 's/\\t/\t/g' \
     | fzf \
-      --border \
+      $FZF_DSTASK_DEFAULT_OPTS \
       --prompt="Select task to $taskcommand: " \
-      --height ~40% \
-      --reverse \
       --delimiter='\t' \
       --with-nth=2..3 \
-      --exact \
-      --multi \
       --select-1 \
       --preview 'echo "Notes:\n"{5}' \
       --preview-window='up:wrap,<5(right,wrap)' \
@@ -84,24 +81,18 @@ task-search() {
 task-search-project() {
   jq -r '.[].name' <<< $(task-projects)\
     | fzf \
-      --border \
+      $FZF_DSTASK_DEFAULT_OPTS \
       --prompt="Select project: " \
-      --height ~40% \
-      --reverse \
-      --exact \
       --bind enter:accept-or-print-query \
+      --no-multi \
       --tmux
   }
 
 task-search-tags() {
   task-tags \
     | fzf \
-      --border \
+      $FZF_DSTASK_DEFAULT_OPTS \
       --prompt="Select tags: " \
-      --height ~40% \
-      --reverse \
-      --exact \
-      --multi \
       --bind enter:accept-or-print-query \
       --tmux
   }
