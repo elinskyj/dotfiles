@@ -1,3 +1,11 @@
+(deftemplate homerow (tap-time hold-time tap-action hold-action keys)
+  (tap-hold-release-keys $tap-time $hold-time (multi $tap-action @tap) $hold-action $keys)
+)
+
+(deftemplate homerowv (tap-time hold-time tap-action hold-action keys)
+  (tap-hold-release-keys $tap-time $hold-time $tap-action $hold-action $keys)
+)
+
 (defcfg
   process-unmapped-keys yes
   concurrent-tap-hold yes
@@ -13,9 +21,9 @@
 )
 
 (defvar
-  tap-time       200
-  hold-time      150
-  hold-time-slow 200
+  tt  200
+  ht  150
+  hts 200
 
   left-hand-keys (
     q w e r t
@@ -32,6 +40,7 @@
 
 (deffakekeys
   to-base (layer-switch base)
+  to-vim (layer-switch vim)
 )
 
 (defalias
@@ -45,18 +54,28 @@
   lsv (layer-switch vim)
 
   escbase (multi esc (on-idle-fakekey to-base tap 20))
-  escnum (tap-hold $tap-time $hold-time esc (layer-while-held num))
-  capmod (tap-hold $tap-time $hold-time caps (layer-switch nomods))
-  a (tap-hold-release-keys $tap-time $hold-time-slow (multi a @tap) lmet $left-hand-keys)
-  s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
-  d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lsft $left-hand-keys)
-  f (tap-hold-release-keys $tap-time $hold-time (multi f @tap) lctl $left-hand-keys)
-  j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rctl $right-hand-keys)
-  k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rsft $right-hand-keys)
-  l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
-  ; (tap-hold-release-keys $tap-time $hold-time-slow (multi ; @tap) rmet $right-hand-keys)
-  lsft (tap-dance $tap-time (lsft caps))
-  rsft (tap-dance $tap-time (rsft caps))
+  escnum (tap-hold $tt $ht esc (layer-while-held num))
+  capmod (tap-hold $tt $ht caps (layer-switch nomods))
+  a (t! homerow $tt $hts a lmet $left-hand-keys)
+  s (t! homerow $tt $ht  s lalt $left-hand-keys)
+  d (t! homerow $tt $ht  d lsft $left-hand-keys)
+  f (t! homerow $tt $ht  f lctl $left-hand-keys)
+  j (t! homerow $tt $ht  j lctl $right-hand-keys)
+  k (t! homerow $tt $ht  k lsft $right-hand-keys)
+  l (t! homerow $tt $ht  l lalt $right-hand-keys)
+  ; (t! homerow $tt $hts ; lmet $right-hand-keys)
+  lsft (tap-dance $tt (lsft caps))
+  rsft (tap-dance $tt (rsft caps))
+
+  vw (multi ctl rght)
+  vi @lsb
+  vo (multi enter @lsb)
+  va (t! homerowv $tt $hts (multi rght @lsb) lmet $left-hand-keys)
+  vh lft
+  vj (t! homerowv $tt $ht down lctl $right-hand-keys)
+  vk (t! homerowv $tt $ht up   lsft $right-hand-keys)
+  vl (t! homerowv $tt $ht rght lalt $right-hand-keys)
+  vb (multi ctl lft)
 )
 
 (deflayer base
@@ -87,10 +106,10 @@
 )
 
 (deflayer vim
-  @escbase
-  grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @escnum @a   @s   @d   @f   g    h  lft  down  up  rght   '    ret
-  @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
+  @lsb
+  grv      1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab      q    @vw  e    r    t    y    u   @vi   o    p    [    ]    \
+  @escnum  @va  @s   @d   @f   g   @vh  @vj  @vk  @vl  @;   '    ret
+  @lsft    z    x    c    v   @vb   n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
