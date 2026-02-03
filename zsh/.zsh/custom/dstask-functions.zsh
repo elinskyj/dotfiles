@@ -112,7 +112,7 @@ taskwrap() {
         local defsearch=0
         taskcommand="duplicate"
         tasklist="$(task show-templates)"
-        print -z "task add template:$(task-search) project:{{PROJECT}} due:{{$due_date}}" ;;
+        print -z "task add template:$(task-search) project:'{{PROJECT}}' due:{{$due_date}}" ;;
       edit|start|remove)
         taskcommand="$subcommand" ;;
       modify)
