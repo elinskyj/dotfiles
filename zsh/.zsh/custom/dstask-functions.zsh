@@ -1,4 +1,5 @@
 dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
+due_date=$(date -d 'now + '$dstask_due_offset +%F)
 dstaskbin="$(which dstask)"
 
 task() {
@@ -46,7 +47,7 @@ task-tags() {
 # context
 task-context() {task context "$@" && task}
 task-context-default() {task-context -office -lisp -cad "$@"}
-task-context-due() {task-context due.before:$(date -d 'now + '$dstask_due_offset +%F) "$@"}
+task-context-due() {task-context due.before:$due_date "$@"}
 task-context-project() {task-context-default project:"$@"}
 task-context-office() {task-context +office "$@"}
 
@@ -119,7 +120,7 @@ taskwrap() {
         local defsearch=0
         taskcommand="duplicate"
         tasklist="$(task show-templates)"
-        print -z "task add template:$(task-search) " ;;
+        print -z "task add template:$(task-search) project:{{PROJECT}} due:{{$due_date}}" ;;
       edit)
         taskcommand="edit" ;;
       modify)
