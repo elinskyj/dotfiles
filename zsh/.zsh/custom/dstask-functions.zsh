@@ -72,7 +72,8 @@ task-search() {
       --preview-label-pos=1:top \
       --bind 'focus:transform-preview-label:echo \|\|Project: {2} \| Summary: {3} \| Due: $(date -d {4} +%a\ %D)\|\|' \
       --query="$@" \
-    | sed 's/^\([0-9]*\).*/\1/'\
+      --accept-nth=1 \
+    | sed -z 's/\n/ /g; s/ $/\n/'
   )
   tasklist=$(task)
   if [[ -n $task_id ]]; then
