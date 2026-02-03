@@ -113,23 +113,19 @@ taskwrap() {
         taskcommand="duplicate"
         tasklist="$(task show-templates)"
         print -z "task add template:$(task-search) project:{{PROJECT}} due:{{$due_date}}" ;;
-      edit)
-        taskcommand="edit" ;;
+      edit|start|remove)
+        taskcommand="$subcommand" ;;
       modify)
         local defsearch=0
         taskcommand="modify details"
         print -z "task-modify $(task-search) " ;;
       note)
         taskcommand="edit notes" ;;
-      start)
-        taskcommand="start" ;;
       stop)
         tasklist="$(task show-active)"
         taskcommand="stop" ;;
       done)
         taskcommand="mark done" ;;
-      remove)
-        taskcommand="remove" ;;
       *)
         taskcommand="" ;;
     esac
