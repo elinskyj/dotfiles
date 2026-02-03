@@ -141,9 +141,7 @@ taskwrap() {
       *)
         taskcommand="" ;;
     esac
-    if [[ $defsearch == 1 ]]; then
-      task $subcommand $(task-search)
-    fi
+    [[ $defsearch == 1 ]] && task $subcommand $(task-search)
     task
 
   else
