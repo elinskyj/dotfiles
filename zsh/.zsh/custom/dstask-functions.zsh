@@ -23,6 +23,7 @@ task-stop() {taskwrap stop "$@"}
 task-done() {taskwrap done "$@"}
 task-remove() {taskwrap remove "$@"}
 task-log() {task log "$@" && task}
+task-last() {jq 'sort_by(.created) | .[-1].id' <<<"$(task)"}
 task-projects() {
   if [[ $@ == "" ]]; then
     task show-projects
