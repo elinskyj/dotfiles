@@ -5,7 +5,7 @@ dstaskbin="$(which dstask)"
 
 task() {
   if [[ $@ == "" ]]; then
-      $dstaskbin show-open
+      $dstaskbin next
   else
       $dstaskbin "$@"
   fi

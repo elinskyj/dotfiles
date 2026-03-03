@@ -1,4 +1,5 @@
 alias ta='task-add'
+alias tall='task show-open'
 alias tap='task-add-project'
 alias tat='task-add-template'
 alias te='task-edit'
