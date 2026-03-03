@@ -3,13 +3,7 @@ dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
 due_date=$(date -d 'now + '$dstask_due_offset +%F)
 dstaskbin="$(which dstask)"
 
-task() {
-  if [[ $@ == "" ]]; then
-      $dstaskbin next
-  else
-      $dstaskbin "$@"
-  fi
-}
+task() {[[ $@ == "" ]] && $dstaskbin next || $dstaskbin "$@"}
 tasklist=$(task)
 
 task-add() {task add "$@" && task}
@@ -24,20 +18,8 @@ task-done() {taskwrap done "$@"}
 task-remove() {taskwrap remove "$@"}
 task-log() {task log "$@" && task}
 task-last() {jq 'sort_by(.created) | .[-1].id' <<<"$(task)"}
-task-projects() {
-  if [[ $@ == "" ]]; then
-    task show-projects
-  else
-    task project:"$@"
-  fi
-}
-task-templates() {
-  if [[ $@ == "" ]]; then
-    task show-templates
-  else
-    task template "$@"
-  fi
-}
+task-projects() {[[ $@ == "" ]] && task show-projects || task project:"$@"}
+task-templates() {[[ $@ == "" ]] && task show-templates || task template "$@"}
 task-tags() {
   local old_task_context=$(task context)
   task context none
@@ -74,9 +56,7 @@ task-search() {
     | sed -z 's/\n/ /g; s/ $/\n/'
   )
   tasklist=$(task)
-  if [[ -n $task_id ]]; then
-    echo "$task_id"
-  fi
+  [[ -n $task_id ]] && echo "$task_id"
 }
 
 task-search-project() {
