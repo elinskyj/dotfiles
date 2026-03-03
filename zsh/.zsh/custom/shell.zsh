@@ -39,7 +39,7 @@ cdr() {
       --prompt="Select directory: " \
       --bind "one:accept" \
       --query="$@" \
-    | awk '{print $2}'
+      --accept-nth=2
   )
   if [ -n "$dir" ]; then
     eval $dir || return
