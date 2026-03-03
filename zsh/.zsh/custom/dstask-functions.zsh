@@ -88,7 +88,7 @@ taskwrap() {
     case $subcommand in
       add-project)
         local defsearch=0
-        print -z "task-add-project '$(task-search-project)' " ;;
+        print -z "task-add-project '$(task-search-project)' due:{{$due_date}}" ;;
       add-template)
         local defsearch=0
         taskcommand="duplicate"
