@@ -63,7 +63,7 @@ task-search-project() {
   jq -r '.[].name' <<< $(task-projects)\
     | fzf \
       $FZF_DSTASK_DEFAULT_OPTS \
-      --prompt="Select project: " \
+      --prompt="Select project or enter a new project: " \
       --bind enter:accept-or-print-query \
       --no-multi \
       --tmux
