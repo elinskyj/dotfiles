@@ -70,16 +70,6 @@
   ; (t! homerowr ; lmet $hts)
   lsft (tap-dance $tt (lsft caps))
   rsft (tap-dance $tt (rsft caps))
-
-  vw (multi ctl rght)
-  vi @lsb
-  vo (multi enter @lsb)
-  va (t! homerowv $tt $hts (multi rght @lsb) lmet $left-hand-keys)
-  vh lft
-  vj (t! homerowv $tt $ht down lctl $right-hand-keys)
-  vk (t! homerowv $tt $ht up   lsft $right-hand-keys)
-  vl (t! homerowv $tt $ht rght lalt $right-hand-keys)
-  vb (multi ctl lft)
 )
 
 (deflayer base
@@ -109,11 +99,4 @@
   _        _    _              _              _    _    _
 )
 
-(deflayer vim
-  @lsb
-  grv      1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab      q    @vw  e    r    t    y    u   @vi   o    p    [    ]    \
-  @escnum  @va  @s   @d   @f   g   @vh  @vj  @vk  @vl  @;   '    ret
-  @lsft    z    x    c    v   @vb   n    m    ,    .    /    @rsft
-  lctl lmet lalt           spc            ralt rmet rctrl
-)
+(include vim.kbd)

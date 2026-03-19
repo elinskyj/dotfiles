@@ -1,0 +1,29 @@
+(deftemplate homerowvl (tap-action hold-action hold-time)
+  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $left-hand-keys)
+)
+
+(deftemplate homerowvr (tap-action hold-action hold-time)
+  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $right-hand-keys)
+)
+
+(defalias
+  ve (multi ctl rght)
+  vw a
+  vi @lsb
+  vo (multi enter @lsb)
+  va (t! homerowvl (multi rght @lsb) lmet $hts)
+  vh lft
+  vj (t! homerowvr down lctl $ht)
+  vk (t! homerowvr up   lsft $ht)
+  vl (t! homerowvr rght lalt $ht)
+  vb (multi ctl lft)
+)
+
+(deflayer vim
+  @lsb
+  grv      1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab      q    @vw  @ve    r    t    y    u   @vi   o    p    [    ]    \
+  @escnum  @va  @s   @d   @f   g   @vh  @vj  @vk  @vl  @;   '    ret
+  @lsft    z    x    c    v   @vb   n    m    ,    .    /    @rsft
+  lctl lmet lalt           spc            ralt rmet rctrl
+)
