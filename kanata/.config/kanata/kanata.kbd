@@ -1,9 +1,13 @@
-(deftemplate homerow (tap-time hold-time tap-action hold-action keys)
-  (tap-hold-release-keys $tap-time $hold-time (multi $tap-action @tap) $hold-action $keys)
+(deftemplate homerowl (tap-action hold-action hold-time)
+  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $left-hand-keys)
 )
 
-(deftemplate homerowv (tap-time hold-time tap-action hold-action keys)
-  (tap-hold-release-keys $tap-time $hold-time $tap-action $hold-action $keys)
+(deftemplate homerowr (tap-action hold-action hold-time)
+  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $right-hand-keys)
+)
+
+(deftemplate tap-layer (tap-action layer)
+  (tap-hold $tt $ht $tap-action (layer-while-held $layer))
 )
 
 (defcfg
@@ -54,16 +58,16 @@
   lsv (layer-switch vim)
 
   escbase (multi esc (on-idle-fakekey to-base tap 20))
-  escnum (tap-hold $tt $ht esc (layer-while-held num))
+  escnum (t! tap-layer esc num)
   capmod (tap-hold $tt $ht caps (layer-switch nomods))
-  a (t! homerow $tt $hts a lmet $left-hand-keys)
-  s (t! homerow $tt $ht  s lalt $left-hand-keys)
-  d (t! homerow $tt $ht  d lsft $left-hand-keys)
-  f (t! homerow $tt $ht  f lctl $left-hand-keys)
-  j (t! homerow $tt $ht  j lctl $right-hand-keys)
-  k (t! homerow $tt $ht  k lsft $right-hand-keys)
-  l (t! homerow $tt $ht  l lalt $right-hand-keys)
-  ; (t! homerow $tt $hts ; lmet $right-hand-keys)
+  a (t! homerowl a lmet $hts)
+  s (t! homerowl s lalt $ht)
+  d (t! homerowl d lsft $ht)
+  f (t! homerowl f lctl $ht)
+  j (t! homerowr j lctl $ht)
+  k (t! homerowr k lsft $ht)
+  l (t! homerowr l lalt $ht)
+  ; (t! homerowr ; lmet $hts)
   lsft (tap-dance $tt (lsft caps))
   rsft (tap-dance $tt (rsft caps))
 
