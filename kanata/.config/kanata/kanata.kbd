@@ -42,7 +42,7 @@
   )
 )
 
-(deffakekeys
+(defvirtualkeys
   to-base (layer-switch base)
   to-vim (layer-switch vim)
 )
@@ -50,7 +50,7 @@
 (defalias
   tap (multi
     (layer-switch nomods)
-    (on-idle-fakekey to-base tap 20)
+    (on-idle 20 tap-vkey to-base)
   )
 
   lsn (layer-switch num)
@@ -58,7 +58,7 @@
   lsv (layer-switch vim)
 
   rld (tap-hold $tt $ht grv lrld)
-  escbase (multi esc (on-idle-fakekey to-base tap 20))
+  escbase (multi esc (on-idle 20 tap-vkey to-base))
   escnum (t! tap-layer esc num)
   capmod (tap-hold $tt $ht caps (layer-switch nomods))
   a (t! homerowl a lmet $hts)
