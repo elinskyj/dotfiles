@@ -68,7 +68,7 @@
   j (t! homerowr j lctl $ht)
   k (t! homerowr k lsft $ht)
   l (t! homerowr l lalt $ht)
-  ; (t! homerowr ; lmet $hts)
+  ; (t! homerowr (tap-dance $tt (; sldr)) lmet $hts)
   lsft (tap-dance $tt (lsft caps))
   rsft (tap-dance $tt (rsft caps))
 )
@@ -101,3 +101,4 @@
 )
 
 (include vim.kbd)
+(include sequence.kbd)
