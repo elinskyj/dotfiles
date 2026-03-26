@@ -73,6 +73,7 @@
 )
 
 (defalias
+  v-esc (t! tap-layer @lsvn num)
   v-n4 (t! action-sft XX @v-n$)
   v-no (t! action-sft @v_no @v_nO)
   v-na (t! action-sft @v_na @v_nA)
@@ -93,7 +94,7 @@
   @capmod
   @rld     1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @lsvn @v-ia @v-is @v-id @v-if g  h  @v-ij @v-ik @v-il @v-i; '  ret
+  @v-esc @v-ia @v-is @v-id @v-if g  h  @v-ij @v-ik @v-il @v-i; '  ret
   @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
@@ -102,7 +103,7 @@
   @capmod
   @rld     1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @lsvn @v-ia @v-is @v-id @v-if g  h  @v-ij @v-ik @v-il @v-i; '  ret
+  @v-esc @v-ia @v-is @v-id @v-if g  h  @v-ij @v-ik @v-il @v-i; '  ret
   @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
@@ -111,7 +112,7 @@
   @capmod
   @rld     1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @lsvn @v-ia @v-is @v-id @v-if g  h  @v-ij @v-ik @v-il @v-i; '  ret
+  @v-esc @v-ia @v-is @v-id @v-if g  h  @v-ij @v-ik @v-il @v-i; '  ret
   @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
