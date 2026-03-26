@@ -44,7 +44,6 @@
 
 (defvirtualkeys
   to-base (layer-switch base)
-  to-vim (layer-switch vim)
 )
 
 (defalias
@@ -55,7 +54,6 @@
 
   lsn (layer-switch num)
   lsb (layer-switch base)
-  lsv (layer-switch vim)
 
   rld (tap-hold $tt $ht grv lrld)
   escbase (multi esc (on-idle 20 tap-vkey to-base))
@@ -65,10 +63,10 @@
   s (t! homerowl s lalt $ht)
   d (t! homerowl d lsft $ht)
   f (t! homerowl f lctl $ht)
-  j (t! homerowr j lctl $ht)
-  k (t! homerowr k lsft $ht)
-  l (t! homerowr l lalt $ht)
-  ; (t! homerowr (tap-dance $tt (; sldr)) lmet $hts)
+  j (t! homerowr j rctl $ht)
+  k (t! homerowr k rsft $ht)
+  l (t! homerowr l ralt $ht)
+  ; (t! homerowr (tap-dance $tt (; sldr)) rmet $hts)
   lsft (tap-dance $tt (lsft caps))
   rsft (tap-dance $tt (rsft caps))
 )
@@ -96,7 +94,7 @@
   _        _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
   _        _    _    _    _    _   @lsn  kp4  kp5  kp6  -    _    _    _
   @escbase _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
-  @lsft    _    _    _  @lsv   _    end  kp0  kp0  .    /    @rsft
+  @lsft    _    _    _  @lsvn  _    end  kp0  kp0  .    /    @rsft
   _        _    _              _              _    _    _
 )
 
