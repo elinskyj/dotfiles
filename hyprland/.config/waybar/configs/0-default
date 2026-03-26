@@ -22,6 +22,7 @@
 
 "modules-left": [
   "custom/cava_mviz",
+  "custom/playerctl",
 	"hyprland/window",
 	],
 

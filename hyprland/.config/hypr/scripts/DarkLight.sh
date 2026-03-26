@@ -31,7 +31,7 @@ swww="swww img"
 effect="--transition-bezier .43,1.19,1,.4 --transition-fps 60 --transition-type grow --transition-pos 0.925,0.977 --transition-duration 2"
 
 # Determine current theme mode
-if [ "$(cat $HOME/.cache/.theme_mode)" = "Light" ]; then
+if [ "$(\cat $HOME/.cache/.theme_mode)" = "Light" ]; then
   next_mode="Dark"
   # Logic for Dark mode
   wallpaper_path="$dark_wallpapers"
@@ -75,7 +75,8 @@ set_waybar_style() {
 }
 
 # Call the function after determining the mode
-set_waybar_style "$next_mode"
+waybar_style_toggle="$HOME/.cache/.waybar_auto_theme"
+[[ ! -e "$waybar_style_toggle" || "$(\cat "$waybar_style_toggle")" = "True" ]] && set_waybar_style "$next_mode"
 notify_user "$next_mode"
 
 # swaync color change

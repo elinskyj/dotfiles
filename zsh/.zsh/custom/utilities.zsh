@@ -15,6 +15,7 @@ alias vi="nvim"
 alias t=tmux_auto
 
 # disk usage
+alias duh="du -hxd 1 | sort -hr"
 alias duhs="du -hx | sort -hr | less"
 
 # use batcat on debian or bat on other systems instead of cat

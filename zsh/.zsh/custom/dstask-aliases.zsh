@@ -1,4 +1,5 @@
 alias ta='task-add'
+alias tall='task show-open'
 alias tap='task-add-project'
 alias tat='task-add-template'
 alias te='task-edit'
@@ -11,6 +12,7 @@ alias trm='task-remove'
 alias tl='task-log'
 alias tp='task-projects'
 alias tt='task-templates'
+alias -g TL='$(task-last)'
 
 # context
 alias tc='task-context'

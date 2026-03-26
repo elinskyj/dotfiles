@@ -1,13 +1,9 @@
+FZF_DSTASK_DEFAULT_OPTS=("--border" "--height=~40%" "--reverse" "--exact" "--multi")
 dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
+due_date=$(date -d 'now + '$dstask_due_offset +%F)
 dstaskbin="$(which dstask)"
 
-task() {
-  if [[ $@ == "" ]]; then
-      $dstaskbin show-open
-  else
-      $dstaskbin "$@"
-  fi
-}
+task() {[[ $@ == "" ]] && $dstaskbin next || $dstaskbin "$@"}
 tasklist=$(task)
 
 task-add() {task add "$@" && task}
@@ -21,20 +17,9 @@ task-stop() {taskwrap stop "$@"}
 task-done() {taskwrap done "$@"}
 task-remove() {taskwrap remove "$@"}
 task-log() {task log "$@" && task}
-task-projects() {
-  if [[ $@ == "" ]]; then
-    task show-projects
-  else
-    task project:"$@"
-  fi
-}
-task-templates() {
-  if [[ $@ == "" ]]; then
-    task show-templates
-  else
-    task template "$@"
-  fi
-}
+task-last() {jq 'sort_by(.created) | .[-1].id' <<<"$(task)"}
+task-projects() {[[ $@ == "" ]] && task show-projects || task project:"$@"}
+task-templates() {[[ $@ == "" ]] && task show-templates || task template "$@"}
 task-tags() {
   local old_task_context=$(task context)
   task context none
@@ -46,7 +31,7 @@ task-tags() {
 # context
 task-context() {task context "$@" && task}
 task-context-default() {task-context -office -lisp -cad "$@"}
-task-context-due() {task-context due.before:$(date -d 'now + '$dstask_due_offset +%F) "$@"}
+task-context-due() {task-context due.before:$due_date "$@"}
 task-context-project() {task-context-default project:"$@"}
 task-context-office() {task-context +office "$@"}
 
@@ -57,51 +42,40 @@ task-search() {
     jq '.[] | "\(.id)\t\(.project)\t\(.summary)\t\(.due)\t\(.notes)"' <<<"$tasklist" \
     | sed -e 's/\"\(.*\)"/\1/' -e 's/\\t/\t/g' \
     | fzf \
-      --border=rounded \
+      $FZF_DSTASK_DEFAULT_OPTS \
       --prompt="Select task to $taskcommand: " \
-      --height ~40% \
-      --layout=reverse \
       --delimiter='\t' \
       --with-nth=2..3 \
-      --exact \
-      --multi \
       --select-1 \
       --preview 'echo "Notes:\n"{5}' \
       --preview-window='up:wrap,<5(right,wrap)' \
       --preview-label-pos=1:top \
       --bind 'focus:transform-preview-label:echo \|\|Project: {2} \| Summary: {3} \| Due: $(date -d {4} +%a\ %D)\|\|' \
       --query="$@" \
-    | sed 's/^\([0-9]*\).*/\1/'\
+      --accept-nth=1 \
+    | sed -z 's/\n/ /g; s/ $/\n/'
   )
   tasklist=$(task)
-  if [[ -n $task_id ]]; then
-    echo "$task_id"
-  fi
+  [[ -n $task_id ]] && echo "$task_id"
 }
 
 task-search-project() {
   jq -r '.[].name' <<< $(task-projects)\
     | fzf \
-    --border=rounded \
-    --prompt="Select project: " \
-    --height ~40% \
-    --layout=reverse \
-    --exact \
-    --bind enter:accept-or-print-query \
-    --tmux
+      $FZF_DSTASK_DEFAULT_OPTS \
+      --prompt="Select project or enter a new project: " \
+      --bind enter:accept-or-print-query \
+      --no-multi \
+      --tmux
   }
 
 task-search-tags() {
   task-tags \
     | fzf \
-    --border=rounded \
-    --prompt="Select tags: " \
-    --height ~40% \
-    --layout=reverse \
-    --exact \
-    --multi \
-    --bind enter:accept-or-print-query \
-    --tmux
+      $FZF_DSTASK_DEFAULT_OPTS \
+      --prompt="Select tags: " \
+      --bind enter:accept-or-print-query \
+      --tmux
   }
 
 taskwrap() {
@@ -114,35 +88,30 @@ taskwrap() {
     case $subcommand in
       add-project)
         local defsearch=0
-        print -z "task-add-project '$(task-search-project)' " ;;
+        print -z "task-add-project '$(task-search-project)' due:{{$due_date}}" ;;
       add-template)
-        local defsearch=0
-        taskcommand="duplicate"
         tasklist="$(task show-templates)"
-        print -z "task add template:$(task-search) " ;;
-      edit)
-        taskcommand="edit" ;;
+        local defsearch=0 template_id=$(task-search) project=$(task-search-project)
+        taskcommand="duplicate"
+        [[ -n $template_id ]] &&
+        print -z "task add template:$template_id project:'${project:-{{PROJECT\}\}}' due:{{$due_date}}" ;;
+      edit|start|remove)
+        taskcommand="$subcommand" ;;
       modify)
         local defsearch=0
         taskcommand="modify details"
         print -z "task-modify $(task-search) " ;;
       note)
         taskcommand="edit notes" ;;
-      start)
-        taskcommand="start" ;;
       stop)
         tasklist="$(task show-active)"
         taskcommand="stop" ;;
       done)
         taskcommand="mark done" ;;
-      remove)
-        taskcommand="remove" ;;
       *)
         taskcommand="" ;;
     esac
-    if [[ $defsearch == 1 ]]; then
-      task $subcommand $(task-search)
-    fi
+    [[ $defsearch == 1 ]] && task $subcommand $(task-search)
     task
 
   else

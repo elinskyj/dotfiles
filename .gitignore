@@ -7,7 +7,6 @@ shortcuts.zsh
 
 # hyprland
 wallpaper_effects/
-.current_wallpaper
 .initial_startup_done
 
 # wallust generated files
@@ -17,6 +16,11 @@ hyprland/.config/rofi/wallust/colors-rofi.rasi
 hyprland/.config/waybar/wallust/colors-waybar.css
 kitty-colors.conf
 lsd/.config/lsd/colors.yaml
+
+# symlinks
+hyprland/.config/rofi/.current_wallpaper
+hyprland/.config/waybar/style.css
+hyprland/.config/waybar/config
 
 # logs
 *.log

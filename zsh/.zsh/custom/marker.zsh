@@ -6,16 +6,18 @@ _fzf_marker_main_widget() {
     _fzf_marker_placeholder
   else
     local selected
-    if selected=$(cat ${FZF_MARKER_CONF_DIR:-~/.config/marker}/**/*.txt \
-    | sed -e "s/\(^[a-zA-Z0-9_-]\+\)\s/${FZF_MARKER_COMMAND_COLOR:-\x1b[38;5;255m}\1\x1b[0m /" \
-          -e "s/\s*\(#\+\)\(.*\)/${FZF_MARKER_COMMENT_COLOR:-\x1b[38;5;8m}  \1\2\x1b[0m/" \
-    | fzf \
-        --height=80% \
-        --ansi \
-        --border \
-        --layout=reverse \
-        --cycle \
-        -q "$LBUFFER"); then
+    if selected=$( \
+      \cat ${FZF_MARKER_CONF_DIR:-~/.config/marker}/**/*.txt \
+      | sed -e "s/\(^[a-zA-Z0-9_-]\+\)\s/${FZF_MARKER_COMMAND_COLOR:-\x1b[38;5;255m}\1\x1b[0m /" \
+        -e "s/\s*\(#\+\)\(.*\)/${FZF_MARKER_COMMENT_COLOR:-\x1b[38;5;8m}  \1\2\x1b[0m/" \
+      | fzf \
+      --height=80% \
+      --layout=reverse \
+      --border \
+      --cycle \
+      --ansi \
+      -q "$LBUFFER" \
+    ); then
       LBUFFER=$(echo $selected | sed 's/\s*#.*//')
     fi
     zle redisplay

@@ -1,1 +1,20 @@
 dos2unix {{filenames}}##Change line endings to Unix format (LF vs CRLF)
+unix2dos {{filenames}}##Change line endings to Windows format (CRLF vs LF)
+qr {{data}}##Generate a QR code from the provided data
+qr --error-recovery={{level}} {{data}}##Generate a QR code from the provided data with specified error recovery level (L, M, Q, H)
+qr --output={{file}}.png {{data}}##Generate a QR code and save it as an image file
+flatpak install {{repository}} {{application}}##Install a Flatpak application from a specified repository
+flatpak update##Update all applications installed via Flatpak
+flatpak update {{application}}##Update a specific Flatpak application
+flatpak uninstall {{application}}##Uninstall a Flatpak application
+flatpak list##List all installed Flatpak applications
+jq '.' {{file.json}}##Pretty-print a JSON file
+jq -r '.' {{file.json}}##Raw output of a JSON file
+jq '.{{foo}}' {{file.json}}##Extract a specific key from a JSON file
+jq '.{{foo}}[]' {{file.json}}##Extract an array of values from a JSON file
+jq '.{{foo}}[{{element}}]' {{file.json}}##Extract a specific element from an array in a JSON file
+jq '.{{foo}}[{{start}}:{{end}}]' {{file.json}}##Extract a range of elements from an array in a JSON file
+jq '.{{foo}}, {{bar}}' {{file.json}}##Combine filters into one stream
+jq '.{{foo}} | .{{bar}}' {{file.json}}##Pipe the output of one filter to another
+jq '.{{foo}} | select(.{{bar}} {{condition}} {{value}})' {{file.json}}##Filter objects in a JSON array based on a condition
+jq '.{{foo}} // {{default}}' {{file.json}}##Provide a default value if the key does not exist in a JSON file

@@ -7,7 +7,7 @@ SCRIPTSDIR="$HOME/.config/hypr/scripts"
 
 focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 
-PICS=($(find ${wallDIR} -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.pnm" -o -name "*.tga" -o -name "*.tiff" -o -name "*.webp" -o -name "*.bmp" -o -name "*.farbfeld" -o -name "*.gif" \)))
+PICS=($(find "${wallDIR}" -ipath "*/archive" -prune -o -type f -regextype posix-extended -regex ".*\.jpe?g|.*\.pn(g|m)|.*\.tga|.*\.(g|t)iff?|.*\.webp|.*\.bmp|.*\.farbfeld" -print0))
 RANDOMPICS=${PICS[$RANDOM % ${#PICS[@]}]}
 
 # Transition config

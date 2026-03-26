@@ -18,7 +18,7 @@ ae() {
     --bind "enter:become(${EDITOR:-vi} {+}),one:become(${EDITOR:-vi} {+})" \
     --preview="$CATCOMMAND {}" \
     --preview-window=bottom \
-    --query " $@"
+    --query="$@"
   setopt correct
 }
 
@@ -38,8 +38,8 @@ cdr() {
       --reverse \
       --prompt="Select directory: " \
       --bind "one:accept" \
-      --query " $@" \
-    | awk '{print $2}'
+      --query="$@" \
+      --accept-nth=2
   )
   if [ -n "$dir" ]; then
     eval $dir || return
@@ -62,7 +62,7 @@ dote() {
     --bind "enter:become(${EDITOR:-vi} {+}),one:become(${EDITOR:-vi} {+})" \
     --preview="$CATCOMMAND {}" \
     --preview-window=bottom \
-    --query " $@"
+    --query="$@"
   setopt correct
 }
 
