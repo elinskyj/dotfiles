@@ -27,10 +27,10 @@
 )
 
 (defalias
-  lsvn (t! vim2base vim-n 10000)
-  lsvi (t! vim2base vim-i 10000)
-  lsvv (t! vim2base vim-v 10000)
-  lsvc (t! vim2base vim-c 10000)
+  lsvn (t! vim2base vim-n 30000)
+  lsvi (t! vim2base vim-i 30000)
+  lsvv (t! vim2base vim-v 30000)
+  lsvc (t! vim2base vim-c 30000)
 )
 
 (defalias
