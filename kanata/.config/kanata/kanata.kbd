@@ -101,3 +101,4 @@
 (include vim.kbd)
 (include sequence.kbd)
 (include secretseq.kbd) ;; secret sequences e.g. email addresses
+(include macro.kbd)
