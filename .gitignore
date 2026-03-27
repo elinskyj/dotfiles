@@ -1,5 +1,5 @@
-# for custom zsh files with sensitive info
-secrets.zsh
+# for files with potentially sensitive info
+secret*
 shortcuts.zsh
 
 # oh-my-zsh is cloned when .zshrc is sourced
