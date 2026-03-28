@@ -1,15 +1,3 @@
-(deftemplate homerowl (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $left-hand-keys)
-)
-
-(deftemplate homerowr (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $right-hand-keys)
-)
-
-(deftemplate tap-layer (tap-action layer)
-  (tap-hold $tt $ht $tap-action (layer-while-held $layer))
-)
-
 (defcfg
   process-unmapped-keys yes
   concurrent-tap-hold yes
@@ -102,3 +90,4 @@
 (include sequence.kbd)
 (include secretseq.kbd) ;; secret sequences e.g. email addresses
 (include macro.kbd)
+(include template.kbd)

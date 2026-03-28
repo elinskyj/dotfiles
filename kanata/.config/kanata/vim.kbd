@@ -1,31 +1,3 @@
-(deftemplate homerowvl (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $left-hand-keys)
-)
-
-(deftemplate homerowvr (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $right-hand-keys)
-)
-
-(deftemplate vim2base (layer timeout)
-  (multi (layer-switch $layer) (on-idle $timeout tap-vkey to-base))
-)
-
-(deftemplate action-i (action)
-  (multi $action @v_ni)
-)
-
-(deftemplate action-sft (action sft-action)
-  (fork $action $sft-action (lsft rsft))
-)
-
-(deftemplate action-ctl (action ctl-action)
-  (fork $action $ctl-action (lctl rctl))
-)
-
-(deftemplate vis (action)
-  (multi lsft $action)
-)
-
 (defalias
   lsvn (t! vim2base vim-n 30000)
   lsvi (t! vim2base vim-i 30000)

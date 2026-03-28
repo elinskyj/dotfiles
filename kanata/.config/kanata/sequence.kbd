@@ -1,8 +1,3 @@
-(deftemplate seq (vkey inkey outaction)
-    (defvirtualkeys $vkey $outaction)
-    (defseq $vkey $inkey)
-)
-
 (t! seq en      (e n)           (unicode ‒))
 (t! seq em      (e m)           (unicode —))
 (t! seq pm      (p m)           (unicode ±))
