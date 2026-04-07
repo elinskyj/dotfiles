@@ -13,7 +13,7 @@ snapraid_fzf() {
       help)   snapraid --help ;;
       fix)    sudo snapraid fix -e ;;
       log)    less +G < /var/log/snapraid.log ;;
-      scrub)  print -z "sudo snapraid scrub --plan {{PLAN}} {{--older-than DAYS}}" ;;
+      scrub)  print -z "sudo snapraid scrub --plan {{PLAN}} {{--older-than {{DAYS}}}}" ;;
       diff)   less < <(sudo snapraid diff) ;;
       config) snapraid_conf_fzf ;;
       *)      sudo snapraid "$selected" ;;
