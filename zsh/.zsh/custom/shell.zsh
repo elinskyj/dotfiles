@@ -41,9 +41,7 @@ cdr() {
       --query="$@" \
       --accept-nth=2
   )
-  if [ -n "$dir" ]; then
-    eval $dir || return
-  fi
+  [[ -n "$dir" ]] && eval $dir || return
 }
 
 # edit dotfiles
