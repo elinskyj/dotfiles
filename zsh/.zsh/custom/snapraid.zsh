@@ -8,7 +8,7 @@ snapraid_fzf() {
     ) # append extra commands
 
   local selected=$(_fzfhelp_menu "snapraid" "$1" "${extra[@]}")
-  if [ -n "$selected" ]; then
+  [[ -n "$selected" ]] && \
     case "$selected" in
       help)   snapraid --help ;;
       fix)    sudo snapraid fix -e ;;
@@ -18,7 +18,6 @@ snapraid_fzf() {
       config) snapraid_conf_fzf ;;
       *)      sudo snapraid "$selected" ;;
     esac
-  fi
 }
 
 snapraid_conf_fzf() {
@@ -37,7 +36,5 @@ snapraid_conf_fzf() {
         --query="$1" \
   )
 
-  if [ -n "$selected_file" ]; then
-    sudoedit "$selected_file"
-  fi
+  [[ -n "$selected_file" ]] && sudoedit "$selected_file"
 }
