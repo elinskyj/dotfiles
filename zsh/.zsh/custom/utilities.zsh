@@ -19,16 +19,9 @@ alias duh="du -hxd 1 | sort -hr"
 alias duhs="du -hx | sort -hr | less"
 
 # use batcat on debian or bat on other systems instead of cat
-if command -v batcat &> /dev/null; then
-    CATCOMMAND='batcat --color always'
-    alias cat="batcat --color always"
-  elif command -v bat &> /dev/null; then
-    CATCOMMAND=bat
-    alias cat="bat"
-  else
-    CATCOMMAND=cat
-    alias cat="cat"
-fi
+[[ -n $(command -v batcat) ]] && CATCOMMAND="${CATCOMMNAND:-batcat --color always}"
+[[ -n $(command -v bat) ]] && CATCOMMAND="${CATCOMMAND:-bat}"
+alias cat="${CATCOMMAND:-cat}"
 
 # fastfetch
 alias ff="clear && fastfetch"
