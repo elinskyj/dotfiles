@@ -1,8 +1,7 @@
 _fzfhelp_menu() {
-  if [ $# -lt 1 ]; then
-    echo "Usage: $0 <command> [<query>] [<extra list items>]" >&2
-    return 1
-  fi
+  unsetopt correct
+  [[ $# -lt 1 ]] && \
+  echo "Usage: $0 <command> [<query>] [<extra list items>]" >&2 && return 1
 
   local cmd="$1"
   local query="$2"
@@ -41,7 +40,6 @@ _fzfhelp_menu() {
         --select-1 \
       | sed 's/^\(\w*\)\s*.*/\1/'
   )
-  if [ -n "$selected" ]; then
-    echo "$selected"
-  fi
+  [[ -n "$selected" ]] && echo "$selected"
+  setopt correct
 }
