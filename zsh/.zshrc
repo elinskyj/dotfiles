@@ -31,8 +31,6 @@ ENABLE_CORRECTION="true"
 plugins=(
 	git
   colored-man-pages
-  docker
-  docker-compose
   alias-finder
   command-not-found
 	qrcode
