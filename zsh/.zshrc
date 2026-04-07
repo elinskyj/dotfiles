@@ -8,10 +8,8 @@ if [[ ! -e "$HOME/dotfiles/zsh/.oh-my-zsh" ]]; then
   chmod +x "$HOME/dotfiles/zsh/.oh-my-zsh/oh-my-zsh.sh"
 
   for item in "$HOME/dotfiles/zsh/"*; do
-    target="$HOME/$(basename "$item")"
-    if [[ ! -e "$target" ]]; then
-      ln -s "$item" "$target"
-    fi
+    target="$HOME/${item:t}"
+    [[ ! -e "$target" ]] && ln -s "$item" "$target"
   done
 fi
 setopt dotglob
@@ -70,13 +68,9 @@ export NVM_DIR="$HOME/.nvm"
 tmux_auto() {
   if command -v tmux &> /dev/null && [[ -z "$TMUX" ]]; then
     session_count=$(tmux list-sessions 2>/dev/null | wc -l)
-    if [[ "$session_count" -eq 1 ]]; then
-      tmux attach
-    elif [[ "$session_count" -gt 1 ]]; then
-      tmux attach\; choose-tree -wZ
-    else
-      tmux new-session
-    fi
+    [[ "$session_count" -eq 1 ]] && tmux attach || \
+    [[ "$session_count" -gt 1 ]] && tmux attach\; choose-tree -wZ || \
+    tmux new-session
   fi
 }
 
