@@ -36,7 +36,7 @@ _fzfhelp_menu() {
         --with-nth=1 \
         --preview='echo {2}' \
         --preview-window=top:2:wrap \
-        --prompt="Select $cmd command to run: " \
+        --prompt="Select a $cmd command: " \
         --query="$query" \
         --select-1 \
       | sed 's/^\(\w*\)\s*.*/\1/'
