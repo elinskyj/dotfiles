@@ -17,14 +17,6 @@
 )
 
 ;; vim related
-(deftemplate homerowvl (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $left-hand-keys)
-)
-
-(deftemplate homerowvr (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $right-hand-keys)
-)
-
 (deftemplate vim2base (layer timeout)
   (multi (layer-switch $layer) (on-idle $timeout tap-vkey to-base))
 )
