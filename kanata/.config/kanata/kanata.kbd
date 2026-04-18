@@ -35,11 +35,6 @@
 )
 
 (defalias
-  tap (multi
-    (layer-switch nomods)
-    (on-idle 20 tap-vkey to-base)
-  )
-
   lsn (layer-switch num)
   lsb (layer-switch base)
 

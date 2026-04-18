@@ -1,10 +1,10 @@
 ;; general
 (deftemplate homerowl (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $left-hand-keys)
+  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $left-hand-keys)
 )
 
 (deftemplate homerowr (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $right-hand-keys)
+  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $right-hand-keys)
 )
 
 (deftemplate tap-layer (tap-action layer)
