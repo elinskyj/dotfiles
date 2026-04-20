@@ -38,6 +38,8 @@
   lsn (layer-switch num)
   lsb (layer-switch base)
 
+  cwt (caps-word-toggle 1000)
+
   rld (tap-hold $tt $ht grv lrld)
   escbase (multi esc (on-idle 20 tap-vkey to-base))
   escnum (t! tap-layer esc num)
@@ -50,8 +52,8 @@
   k (t! homerowr k rsft $ht)
   l (t! homerowr l ralt $ht)
   ; (t! homerowr (tap-dance 100 (; sldr)) rmet $hts)
-  lsft (tap-dance $tt (lsft caps))
-  rsft (tap-dance $tt (rsft caps))
+  lsft (tap-dance $tt (lsft @cwt))
+  rsft (tap-dance $tt (rsft @cwt))
 )
 
 (deflayer base
