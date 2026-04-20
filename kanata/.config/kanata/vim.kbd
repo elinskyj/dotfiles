@@ -29,7 +29,7 @@
   v-nj (t! homerowr down rctl $ht)
   v-nk (t! homerowr up   rsft $ht)
   v-nl (t! homerowr rght ralt $ht)
-  v-n; (t! homerowr ;    rmet $hts)
+  v-n; (t! homerowr XX   rmet $hts)
 
   v-nb (multi ctl lft)
 )
