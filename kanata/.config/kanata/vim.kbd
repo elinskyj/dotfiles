@@ -31,7 +31,7 @@
   v-nl (t! homerowr rght ralt $ht)
   v-n; (t! homerowr XX   rmet $hts)
 
-  v-nb (multi ctl lft)
+  v-nb C-left
 )
 
 (defalias
