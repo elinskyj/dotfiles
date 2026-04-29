@@ -33,6 +33,14 @@
   (fork $action $ctl-action (lctl rctl))
 )
 
+(deftemplate action-ctl-sft (action ctl-action sft-action)
+  (switch
+    ((or (key-history lctl 1) (key-history rctl 1))) $ctl-action break
+    ((or (key-history lsft 1) (key-history rsft 1))) $sft-action break
+    () $action break
+  )
+)
+
 (deftemplate vis (action)
   (multi lsft $action)
 )

@@ -17,11 +17,11 @@
 
   v_na (t! homerowl (t! action-i rght)  lmet $hts)
   v_nA (t! homerowl (t! action-i @v-n$) lmet $hts)
-  v-ns (t! homerowl s lalt $ht)
-  v_nD (macro S-end del)
-  v_nd (macro end S-home del)
+  v-ns (t! homerowl XX lalt $ht)
+  v_nD (macro S-end 50 C-x)
+  v_nd (macro end S-home 50 C-x)
   v-nd (t! homerowl (tap-dance $tt ((t! action-sft XX @v_nD) @v_nd)) lsft $ht)
-  v-nf (t! homerowl f lctl $ht)
+  v-nf (t! homerowl XX lctl $ht)
   v_ng (multi ctl @v-n0)
   v_nG (multi ctl @v-n$)
 
@@ -31,11 +31,13 @@
   v-nl (t! homerowr rght ralt $ht)
   v-n; (t! homerowr XX   rmet $hts)
 
+  v-nc (tap-dance $tt ((t! action-sft XX (t! action-i @v_nD)) (t! action-i @v_nd)))
+
   v-nb C-left
 )
 
 (defalias
-  v-esc (t! tap-layer (tap-dance $tt (esc @lsvn)) num)
+  v-esc (t! tap-layer (tap-dance 100 (esc @lsvn)) num)
   v-n4 (t! action-sft XX @v-n$)
   v-no (t! action-sft @v_no @v_nO)
   v-na (t! action-sft @v_na @v_nA)
@@ -43,13 +45,27 @@
   v-ng (tap-dance $tt ((t! action-sft XX @v_nG) @v_ng))
 )
 
+(defalias
+  v_iCo (one-shot 1000 (layer-while-held vim-n))
+  v-io (t! action-ctl-sft o (multi @v_iCo C-o) S-o)
+)
+
 (deflayer vim-n
   @lsb
   grv     XX   XX   XX  @v-n4  XX   XX  XX  XX  XX  @v-n0    -    =    bspc
   tab      q  @v-nw  @v-ne  r  t    y    u  @v-ni   @v-no    p    [    ]    \
   @escnum @v-na @v-ns @v-nd @v-nf @v-ng @v-nh @v-nj @v-nk @v-nl @v-n;  '  ret
-  @lsft    z    x    c    v   @v-nb   n    m    ,    .    /    @rsft
+  @lsft    z    x    @v-nc    v   @v-nb   n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
+)
+
+(deflayer vim-d
+  @lsb
+  XX  XX    XX    XX    4    XX    XX    XX    XX    XX    0    XX    XX    XX
+  XX  XX    w    e    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX  a    XX    d    f    g    h    j    k    l    XX    XX    XX
+  lsft XX    XX    XX    XX    b    n    XX    XX    XX    XX    rsft
+  lctl lmet lalt           XX            ralt rmet rctl
 )
 
 (deflayer vim-v
