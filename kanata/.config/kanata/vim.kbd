@@ -1,6 +1,7 @@
 (defalias
   lsvn (t! vim2base vim-n 30000)
   lsvv (t! vim2base vim-v 30000)
+  lsvd (t! vim2base vim-d 30000)
   lsvc (t! vim2base vim-c 30000)
 )
 
@@ -19,8 +20,8 @@
   v_nA (t! homerowl (t! action-i @v-n$) lmet $hts)
   v-ns (t! homerowl XX lalt $ht)
   v_nD (macro S-end 50 C-x)
-  v_nd (macro end S-home 50 C-x)
-  v-nd (t! homerowl (tap-dance $tt ((t! action-sft XX @v_nD) @v_nd)) lsft $ht)
+  v_nd (one-shot 10000 (layer-while-held vim-d))
+  v-nd (t! homerowl (t! action-sft @v_nd @v_nD) lsft $ht)
   v-nf (t! homerowl XX lctl $ht)
   v_ng (multi ctl @v-n0)
   v_nG (multi ctl @v-n$)
@@ -59,13 +60,35 @@
   lctl lmet lalt           spc            ralt rmet rctrl
 )
 
+(defalias
+  v-d4 (t! action-sft XX (macro S-end 50 C-x))
+  v-d0 (macro S-home 50 C-x)
+
+  v_dd (macro end S-home 50 C-x)
+  v-dw (macro C-S-rght 50 C-x)
+  v-de (macro rght C-S-rght S-lft 50 C-x)
+  v-dh (macro S-lft 50 C-x)
+
+  v-da (t! homerowr XX   lmet $hts)
+  v-ds (t! homerowr XX   lalt $ht)
+  v-dd (t! homerowr @v_dd   lsft $ht)
+  v-df (t! homerowr XX   lctl $ht)
+
+  v-dj (t! homerowr (macro S-down 50 C-x) rctl $ht)
+  v-dk (t! homerowr (macro S-up 50 C-x) rsft $ht)
+  v-dl (t! homerowr (macro S-rght 50 C-x) ralt $ht)
+  v-d; (t! homerowr XX   rmet $hts)
+
+  v-db (macro C-S-lft 50 C-x)
+)
+
 (deflayer vim-d
   @lsb
-  XX  XX    XX    XX    4    XX    XX    XX    XX    XX    0    XX    XX    XX
-  XX  XX    w    e    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
-  XX  a    XX    d    f    g    h    j    k    l    XX    XX    XX
-  lsft XX    XX    XX    XX    b    n    XX    XX    XX    XX    rsft
-  lctl lmet lalt           XX            ralt rmet rctl
+  XX     XX   XX    XX   @v-d4  XX     XX    XX     XX     XX   @v-d0  XX    XX    XX
+  @lsvn  XX  @v-dw  @v-de  XX   XX     XX    XX     XX     XX     XX   XX    XX    XX
+  XX     XX   XX    @v-dd  XX   XX    @v-dh  @v-dj  @v-dk  @v-dl  XX   XX    XX
+  lsft   XX   XX   XX     XX  @v-db   XX    XX     XX     XX     XX   rsft
+  lctl  lmet lalt           XX            ralt rmet rctl
 )
 
 (deflayer vim-v
