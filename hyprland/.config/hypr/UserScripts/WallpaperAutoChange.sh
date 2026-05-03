@@ -7,7 +7,7 @@
 #
 # NOTE: this script uses bash (not POSIX shell) for the RANDOM variable
 
-wallust_refresh=$HOME/.config/hypr/scripts/RefreshNoWaybar.sh
+wallust_refresh=$HOME/.config/hypr/scripts/Refresh.sh
 
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 
@@ -39,6 +39,5 @@ while true; do
       sleep 0.5
       "$SCRIPTSDIR/WallpaperLock.sh"
       sleep $INTERVAL
-
     done
 done

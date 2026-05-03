@@ -27,6 +27,9 @@ killall -SIGUSR2 waybar # added since wallust sometimes not applying
 # quit ags & relaunch ags
 ags -q && ags &
 
+# Wallust refresh
+${SCRIPTSDIR}/WallustSwww.sh &
+
 # Kill waybar & swaync (yet again) # added since wallust sometimes not applying
 _ps2=(waybar swaync)
 for _prs2 in "${_ps2[@]}"; do
@@ -36,7 +39,7 @@ for _prs2 in "${_ps2[@]}"; do
 done
 
 # relaunch swaync
-sleep 0.5
+sleep 5
 swaync >/dev/null 2>&1 &
 
 #Restart waybar
@@ -50,4 +53,3 @@ if file_exists "${UserScripts}/RainbowBorders.sh"; then
 fi
 
 exit 0
-

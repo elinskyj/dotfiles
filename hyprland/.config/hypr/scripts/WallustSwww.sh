@@ -28,6 +28,7 @@ if [ -f "$cache_file" ]; then
   fi
   # copy the wallpaper for wallpaper effects
   cp -r "$wallpaper_path" "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+  cp -r "$wallpaper_path" "$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified"
 fi
 
 # Check the flag before executing further commands
