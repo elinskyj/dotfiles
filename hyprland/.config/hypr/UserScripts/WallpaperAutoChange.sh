@@ -29,6 +29,11 @@ INTERVAL=1800
 while true; do
   find "$1" |
     grep -Ev archive |
+    if [[ "$(\cat $HOME/.cache/.theme_mode)" = "Light" ]]; then
+      grep -i 'light'
+    else
+      grep -i 'dark'
+    fi |
     while read -r img; do
       echo "$((RANDOM % 1000)):$img"
     done |
