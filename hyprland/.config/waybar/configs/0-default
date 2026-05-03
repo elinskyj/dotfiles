@@ -23,6 +23,7 @@
 "modules-left": [
   "custom/cava_mviz",
   "custom/playerctl",
+	"custom/separator#line",
 	"hyprland/window",
 	],
 
@@ -39,9 +40,9 @@
 	"group/laptop",
 	"custom/separator#dot-line",
 	"group/mobo_drawer",
-	"custom/separator#line",  
+	"custom/separator#line",
 	"group/audio",
-	"custom/separator#dot-line", 
+	"custom/separator#dot-line",
 	"group/status",
 	],
 }
