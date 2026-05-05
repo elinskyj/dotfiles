@@ -3,11 +3,16 @@
   lsvv (t! vim2base vim-v 30000)
   lsvd (t! vim2base vim-d 30000)
   lsvc (t! vim2base vim-c 30000)
+  lsvq (t! vim2base vim-q 30000)
+  lsv@ (t! vim2base vim-@ 30000)
 )
 
 (defalias
   v-n$ (unshift end)
   v-n0 (unshift home)
+
+  v-nq (one-shot 1000 (layer-while-held vim-q))
+  v-n@ (t! action-sft XX (one-shot 1000 (layer-while-held vim-@)))
 
   v-nw C-rght
   v-ne (macro rght C-rght lft)
@@ -53,8 +58,8 @@
 
 (deflayer vim-n
   @lsb
-  grv     XX   XX   XX  @v-n4  XX   XX  XX  XX  XX  @v-n0    -    =    bspc
-  tab      q  @v-nw  @v-ne  r  t    y    u  @v-ni   @v-no    p    [    ]    \
+  grv     XX     @v-n@   XX  @v-n4  XX   XX  XX  XX  XX  @v-n0    -    =    bspc
+  tab     @v-nq  @v-nw  @v-ne  r  t    y    u  @v-ni   @v-no    p    [    ]    \
   @escnum @v-na @v-ns @v-nd @v-nf @v-ng @v-nh @v-nj @v-nk @v-nl @v-n;  '  ret
   @lsft    z    x    @v-nc    v   @v-nb   n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
@@ -107,4 +112,78 @@
   @v-esc @v-na @v-ns @v-nd @v-nf g  h  @v-nj @v-nk @v-nl @v-n; '  ret
   @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
+)
+
+(defalias
+  v-qq (dynamic-macro-record 65535)
+  v-qw (dynamic-macro-record 65534)
+  v-qe (dynamic-macro-record 65533)
+  v-qr (dynamic-macro-record 65532)
+  v-qt (dynamic-macro-record 65531)
+  v-qy (dynamic-macro-record 65530)
+  v-qu (dynamic-macro-record 65529)
+  v-qi (dynamic-macro-record 65528)
+  v-qo (dynamic-macro-record 65527)
+  v-qp (dynamic-macro-record 65526)
+  v-qa (dynamic-macro-record 65525)
+  v-qs (dynamic-macro-record 65524)
+  v-qd (dynamic-macro-record 65523)
+  v-qf (dynamic-macro-record 65522)
+  v-qg (dynamic-macro-record 65521)
+  v-qh (dynamic-macro-record 65520)
+  v-qj (dynamic-macro-record 65519)
+  v-qk (dynamic-macro-record 65518)
+  v-ql (dynamic-macro-record 65517)
+  v-qz (dynamic-macro-record 65516)
+  v-qx (dynamic-macro-record 65515)
+  v-qc (dynamic-macro-record 65514)
+  v-qv (dynamic-macro-record 65513)
+  v-qb (dynamic-macro-record 65512)
+  v-qn (dynamic-macro-record 65511)
+  v-qm (dynamic-macro-record 65510)
+
+  v-@q (dynamic-macro-play 65535)
+  v-@w (dynamic-macro-play 65534)
+  v-@e (dynamic-macro-play 65533)
+  v-@r (dynamic-macro-play 65532)
+  v-@t (dynamic-macro-play 65531)
+  v-@y (dynamic-macro-play 65530)
+  v-@u (dynamic-macro-play 65529)
+  v-@i (dynamic-macro-play 65528)
+  v-@o (dynamic-macro-play 65527)
+  v-@p (dynamic-macro-play 65526)
+  v-@a (dynamic-macro-play 65525)
+  v-@s (dynamic-macro-play 65524)
+  v-@d (dynamic-macro-play 65523)
+  v-@f (dynamic-macro-play 65522)
+  v-@g (dynamic-macro-play 65521)
+  v-@h (dynamic-macro-play 65520)
+  v-@j (dynamic-macro-play 65519)
+  v-@k (dynamic-macro-play 65518)
+  v-@l (dynamic-macro-play 65517)
+  v-@z (dynamic-macro-play 65516)
+  v-@x (dynamic-macro-play 65515)
+  v-@c (dynamic-macro-play 65514)
+  v-@v (dynamic-macro-play 65513)
+  v-@b (dynamic-macro-play 65512)
+  v-@n (dynamic-macro-play 65511)
+  v-@m (dynamic-macro-play 65510)
+)
+
+(deflayer vim-q
+  @lsb
+  XX  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX XX XX
+  XX  @v-qq @v-qw @v-qe @v-qr @v-qt @v-qy @v-qu @v-qi @v-qo @v-qp XX XX XX
+  XX  @v-qa @v-qs @v-qd @v-qf @v-qg @v-qh @v-qj @v-qk @v-ql XX    XX XX
+  XX  @v-qz @v-qx @v-qc @v-qv @v-qb @v-qn @v-qm XX  XX  XX  XX
+  XX   XX   XX              XX             XX   XX   XX
+)
+
+(deflayer vim-@
+  @lsb
+  XX  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX XX XX
+  XX  @v-@q @v-@w @v-@e @v-@r @v-@t @v-@y @v-@u @v-@i @v-@o @v-@p XX XX XX
+  XX  @v-@a @v-@s @v-@d @v-@f @v-@g @v-@h @v-@j @v-@k @v-@l XX    XX XX
+  XX  @v-@z @v-@x @v-@c @v-@v @v-@b @v-@n @v-@m XX  XX  XX  XX
+  XX   XX   XX              XX             XX   XX   XX
 )
