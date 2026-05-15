@@ -30,7 +30,7 @@
   v_nA (t! homerowl (t! action-i @v-n$) lmet $hts)
   v-ns (t! homerowl XX lalt $ht)
   v_nD (macro S-end 50 C-x)
-  v_nd (one-shot 10000 (layer-while-held vim-d))
+  v_nd (one-shot-release 10000 (layer-while-held vim-d))
   v-nd (t! homerowl (t! action-sft @v_nd @v_nD) lsft $ht)
   v-nf (t! homerowl XX lctl $ht)
   v_ng (multi ctl @v-n0)
@@ -58,7 +58,7 @@
 )
 
 (defalias
-  v_iCo (one-shot 1000 (layer-while-held vim-n))
+  v_iCo (one-shot-release 1000 (layer-while-held vim-n))
   v-io (t! action-ctl-sft o (multi @v_iCo (one-shot-pause-processing 50) C-o) S-o)
 )
 
