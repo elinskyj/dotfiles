@@ -18,6 +18,10 @@
 
   v-nw C-rght
   v-ne (macro rght C-rght lft)
+  v-nCr C-y
+  v_nr (multi del (one-shot-release 1000 (layer-while-held base)))
+  v-nr (t! action-ctl @v_nr @v-nCr)
+  v-nu C-z
   v_nI (t! action-i @v-n0)
   v_no (t! action-i (macro @v-n$ ret))
   v_nO (t! action-i (macro @v-n0 ret (unshift up)))
@@ -61,7 +65,7 @@
 (deflayer vim-n
   @lsb
   grv     XX     @v-n@   XX  @v-n4  XX   XX  XX  XX  XX  @v-n0    -    =    bspc
-  tab     @v-nq  @v-nw  @v-ne  r  t    y    u  @v-ni   @v-no    p    [    ]    \
+  tab     @v-nq  @v-nw  @v-ne  @v-nr  t    y  @v-nu  @v-ni   @v-no    p    [    ]    \
   @escnum @v-na @v-ns @v-nd @v-nf @v-ng @v-nh @v-nj @v-nk @v-nl @v-n;  '  ret
   @lsft    z    x    @v-nc    v   @v-nb   n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
