@@ -8,6 +8,8 @@
 )
 
 (defalias
+  v_ni @lsb
+
   v-n$ (unshift end)
   v-n0 (unshift home)
 
@@ -16,7 +18,6 @@
 
   v-nw C-rght
   v-ne (macro rght C-rght lft)
-  v_ni @lsb
   v_nI (t! action-i @v-n0)
   v_no (t! action-i (macro @v-n$ ret))
   v_nO (t! action-i (macro @v-n0 ret (unshift up)))
