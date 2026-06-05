@@ -25,6 +25,7 @@
   v_nI (t! action-i @v-n0)
   v_no (t! action-i (macro @v-n$ ret))
   v_nO (t! action-i (macro @v-n0 ret (unshift up)))
+  v-np C-v
 
   v_na (t! homerowl (t! action-i rght)  lmet $hts)
   v_nA (t! homerowl (t! action-i @v-n$) lmet $hts)
@@ -43,6 +44,7 @@
   v-nl (t! homerowr rght ralt $ht)
   v-n; (t! homerowr XX   rmet $hts)
 
+  v-nx (macro S-rght 50 C-x rght)
   v-nc (tap-dance $tt ((t! action-sft XX (t! action-i @v_nD)) (t! action-i @v_nd)))
 
   v-nb C-left
@@ -65,9 +67,9 @@
 (deflayer vim-n
   @lsb
   grv     XX     @v-n@   XX  @v-n4  XX   XX  XX  XX  XX  @v-n0    -    =    bspc
-  tab     @v-nq  @v-nw  @v-ne  @v-nr  t    y  @v-nu  @v-ni   @v-no    p    [    ]    \
+  tab     @v-nq  @v-nw  @v-ne  @v-nr  t    y  @v-nu  @v-ni   @v-no  @v-np    [    ]    \
   @escnum @v-na @v-ns @v-nd @v-nf @v-ng @v-nh @v-nj @v-nk @v-nl @v-n;  '  ret
-  @lsft    z    x    @v-nc    v   @v-nb   n    m    ,    .    /    @rsft
+  @lsft    z  @v-nx    @v-nc    v   @v-nb   n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
 
@@ -87,7 +89,7 @@
 
   v-dj (t! homerowr (macro S-down 50 C-x) rctl $ht)
   v-dk (t! homerowr (macro S-up 50 C-x) rsft $ht)
-  v-dl (t! homerowr (macro S-rght 50 C-x) ralt $ht)
+  v-dl (t! homerowr @v-nx ralt $ht)
   v-d; (t! homerowr XX   rmet $hts)
 
   v-db (macro C-S-lft 50 C-x)
