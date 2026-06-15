@@ -38,7 +38,7 @@
   v_nG (multi ctl @v-n$)
 
   v-nh lft
-  v_nj (macro @v-n$ 100 C-del del spc)
+  v_nj (macro @v-n$ 100 del spc)
   v-nj (t! homerowr (t! action-sft down @v_nj) rctl $ht)
   v-nk (t! homerowr up   rsft $ht)
   v-nl (t! homerowr rght ralt $ht)
