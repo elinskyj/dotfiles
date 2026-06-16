@@ -14,12 +14,12 @@
   v-n0 (unshift home)
 
   v-nq (one-shot 1000 (layer-while-held vim-q))
-  v-n@ (t! action-sft XX (one-shot 1000 (layer-while-held vim-@)))
+  v-n@ (t! action-sft XX (t! osr-lay vim-@ 1000))
 
   v-nw C-rght
   v-ne (macro rght C-rght lft)
   v-nCr C-y
-  v_nr (multi del (one-shot-release 1000 (layer-while-held base)))
+  v_nr (multi del (t! osr-lay base 1000))
   v-nr (t! action-ctl @v_nr @v-nCr)
   v-nu C-z
   v_nI (t! action-i @v-n0)
@@ -31,7 +31,7 @@
   v_nA (t! homerowl (t! action-i @v-n$) lmet $hts)
   v-ns (t! homerowl XX lalt $ht)
   v_nD (macro S-end 50 C-x)
-  v_nd (one-shot-release 10000 (layer-while-held vim-d))
+  v_nd (t! osr-lay vim-d 10000)
   v-nd (t! homerowl (t! action-sft @v_nd @v_nD) lsft $ht)
   v-nf (t! homerowl XX lctl $ht)
   v_ng (multi ctl @v-n0)

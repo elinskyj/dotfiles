@@ -44,3 +44,7 @@
 (deftemplate vis (action)
   (multi lsft $action)
 )
+
+(deftemplate osr-lay (lay timeout)
+  (one-shot-release $timeout (layer-while-held $lay))
+)
