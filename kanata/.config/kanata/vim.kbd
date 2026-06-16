@@ -79,7 +79,7 @@
 
   v_dd (macro end S-home 50 C-x del)
   v-dw (macro C-S-rght 50 C-x)
-  v-de (macro rght C-S-rght S-lft 50 C-x)
+  v-de (macro C-S-rght S-lft 50 C-x)
   v-dh (macro S-lft 50 C-x)
 
   v-da (t! homerowl XX   lmet $hts)
