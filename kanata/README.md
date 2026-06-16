@@ -6,11 +6,20 @@ This directory houses a configuration file and systemd service for [Kanata](http
 - [kanata.kbd](./.config/kanata/kanata.kbd): Kanata configuration.
 - [kanata.service](./.config/systemd/user/kanata.service): A systemd service to start kanata at boot on linux.
 - [README.md](./README.md): Documentation for this folder (you’re reading it!).
+- Supporting Kanata includes: `vim.kbd`, `sequence.kbd`, `macro.kbd`, `template.kbd`, and `secretseq.kbd`.
 
 ## Features
 - [Home Row Mods](https://precondition.github.io/home-row-mods): Adds additional functionality and improves ergonomics by turning the home row keys into modifiers (`⇧ Shift`, `⎈ Control`, `⎇ Alt`, and `⊞ Win`) when held.
 - Home Position Numpad Layer: Integrates a numpad layer on the right hand from the home position for enhanced productivity and ergonomics. Hold `caps` for this layer.
 - Caps Lock & Escape Swap: Swaps the Caps Lock and Escape keys for improved usability and efficiency.
+- Dual-role keys: `caps` and `grv` are configured for tap/hold behavior so they act as normal keys on tap, and layer or modifier keys when held.
+- `nomods` layer: A base layer option that preserves key output without modifier behavior for when you need traditional typing.
+- Vim-inspired modal editing: `vim.kbd` provides custom Kanata layers for normal, visual, delete/operator, and command-mode workflows, including one-shot transitions and custom navigation macros.
+- Unicode and text sequences: `sequence.kbd` maps common shortcuts to symbols like `±`, `∞`, `π`, `Ω`, and more.
+- Secure secret sequences: `secretseq.kbd` stores private expansion sequences separately from the main config.
+- Systemd user service: `kanata.service` can launch Kanata automatically on login with `systemctl --user enable --now kanata.service`.
+- Dynamic macros: `macro.kbd` supports recording and playback of custom keystroke macros.
+- Reusable templates: `template.kbd` defines tap-hold and layer helpers used throughout the Kanata config.
 
 ## Setup
 To use these configurations:
@@ -25,6 +34,11 @@ To use these configurations:
 3. Copy `kanata.kbd` to your config folder:
     ```bash
     cp kanata.kbd ~/.config/kanata/kanata.kbd
+    ```
+4. Install the systemd unit for your user session if you want Kanata to start automatically:
+    ```bash
+    systemctl --user daemon-reload
+    systemctl --user enable --now kanata.service
     ```
 
 ### Using GNU Stow
