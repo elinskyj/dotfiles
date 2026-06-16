@@ -45,7 +45,7 @@
   v-n; (t! homerowr XX   rmet $hts)
 
   v-nx (macro S-rght 50 C-x rght)
-  v-nc (tap-dance $tt ((t! action-sft XX (t! action-i @v_nD)) (t! action-i @v_nd)))
+  v-nc (t! action-sft (t! osr-lay vim-c 1000) (t! action-i @v_nD))
 
   v-nb C-left
 )
@@ -113,13 +113,26 @@
   lctl lmet lalt           spc            ralt rmet rctrl
 )
 
+(defalias
+  v-c4 (t! action-i @v-d4)
+  v-c0 (t! action-i @v-d0)
+  v-cw (t! action-i @v-dw)
+  v-ce (t! action-i @v-de)
+  v-ch (t! action-i @v-dh)
+  v-cj (t! action-i @v-dj)
+  v-ck (t! action-i @v-dk)
+  v-cl (t! action-i @v-dl)
+  v-cc (t! action-i @v-dd)
+  v-cb (t! action-i @v-db)
+)
+
 (deflayer vim-c
-  @capmod
-  @rld     1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @v-esc @v-na @v-ns @v-nd @v-nf g  h  @v-nj @v-nk @v-nl @v-n; '  ret
-  @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
-  lctl lmet lalt           spc            ralt rmet rctrl
+  @lsb
+  XX     XX   XX    XX   @v-c4  XX     XX    XX     XX     XX   @v-c0  XX    XX    XX
+  @lsvn  XX  @v-cw  @v-ce  XX   XX     XX    XX     XX     XX     XX   XX    XX    XX
+  XX     XX   XX    XX  XX   XX    @v-ch  @v-cj  @v-ck  @v-cl  XX   XX    XX
+  lsft   XX   XX   @v-cc     XX  @v-cb   XX    XX     XX     XX     XX   rsft
+  lctl  lmet lalt           XX            ralt rmet rctl
 )
 
 (defalias
