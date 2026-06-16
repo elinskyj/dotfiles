@@ -82,10 +82,10 @@
   v-de (macro rght C-S-rght S-lft 50 C-x)
   v-dh (macro S-lft 50 C-x)
 
-  v-da (t! homerowr XX   lmet $hts)
-  v-ds (t! homerowr XX   lalt $ht)
-  v-dd (t! homerowr @v_dd   lsft $ht)
-  v-df (t! homerowr XX   lctl $ht)
+  v-da (t! homerowl XX   lmet $hts)
+  v-ds (t! homerowl XX   lalt $ht)
+  v-dd (t! homerowl @v_dd   lsft $ht)
+  v-df (t! homerowl XX   lctl $ht)
 
   v-dj (t! homerowr (macro S-down 50 C-x) rctl $ht)
   v-dk (t! homerowr (macro S-up 50 C-x) rsft $ht)
@@ -97,11 +97,11 @@
 
 (deflayer vim-d
   @lsb
-  XX     XX   XX    XX   @v-d4  XX     XX    XX     XX     XX   @v-d0  XX    XX    XX
-  @lsvn  XX  @v-dw  @v-de  XX   XX     XX    XX     XX     XX     XX   XX    XX    XX
-  XX     XX   XX    @v-dd  XX   XX    @v-dh  @v-dj  @v-dk  @v-dl  XX   XX    XX
-  lsft   XX   XX   XX     XX  @v-db   XX    XX     XX     XX     XX   rsft
-  lctl  lmet lalt           XX            ralt rmet rctl
+  XX     XX     XX     XX     @v-d4  XX     XX     XX     XX     XX     @v-d0  XX    XX    XX
+  @lsvn  XX     @v-dw  @v-de  XX     XX     XX     XX     XX     XX     XX     XX    XX    XX
+  XX     @v-da  @v-ds  @v-dd  @v-df  XX     @v-dh  @v-dj  @v-dk  @v-dl  XX     XX    XX
+  lsft   XX     XX     XX     XX     @v-db  XX     XX     XX     XX     XX     rsft
+  lctl   lmet   lalt          XX                          ralt   rmet   rctl
 )
 
 (deflayer vim-v
