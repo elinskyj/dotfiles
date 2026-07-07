@@ -47,7 +47,12 @@
   v-nx (macro S-rght 50 C-x rght)
   v-nc (t! action-sft (t! osr-lay vim-c 1000) (t! action-i @v_nD))
 
+  v-ny XX
+  v-nv @lsvv
   v-nb C-left
+  v-n/ XX
+
+  v-n. rpt-any
 )
 
 (defalias
@@ -66,11 +71,11 @@
 
 (deflayer vim-n
   @lsb
-  grv     XX     @v-n@   XX  @v-n4  XX   XX  XX  XX  XX  @v-n0    -    =    bspc
-  tab     @v-nq  @v-nw  @v-ne  @v-nr  t    y  @v-nu  @v-ni   @v-no  @v-np    [    ]    \
-  @escnum @v-na @v-ns @v-nd @v-nf @v-ng @v-nh @v-nj @v-nk @v-nl @v-n;  '  ret
-  @lsft    z  @v-nx    @v-nc    v   @v-nb   n    m    ,    .    /    @rsft
-  lctl lmet lalt           spc            ralt rmet rctrl
+  grv      XX     @v-n@  XX     @v-n4  XX     XX     XX     XX     XX     @v-n0    -    =    bspc
+  tab      @v-nq  @v-nw  @v-ne  @v-nr  XX     @v-ny  @v-nu  @v-ni  @v-no  @v-np    [    ]    \
+  @escnum  @v-na  @v-ns  @v-nd  @v-nf  @v-ng  @v-nh  @v-nj  @v-nk  @v-nl  @v-n;  '  ret
+  @lsft    XX     @v-nx  @v-nc  @v-nv  @v-nb  XX     XX     XX     @v-n.  @v-n/    @rsft
+  lctl     lmet   lalt           spc          ralt   rmet rctrl
 )
 
 (defalias
