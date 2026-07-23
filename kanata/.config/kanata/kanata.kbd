@@ -79,7 +79,7 @@
   _        _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
   _        _    _    _    _    _   @lsn  kp4  kp5  kp6  -    _    _    _
   @escbase _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
-  @lsft    _    _    _  @lsvn  _    end  kp0  kp0  .    /    @rsft
+  @lsft    _    _    _    _    _    end  kp0  kp0  .    /    @rsft
   _        _    _              _              _    _    _
 )
 
