@@ -44,6 +44,7 @@
   escbase (multi esc (on-idle 20 tap-vkey to-base))
   escnum (t! tap-layer esc num)
   capmod (tap-hold $tt $ht caps (layer-switch nomods))
+
   a (t! homerowl a lmet $hts)
   s (t! homerowl s lalt $ht)
   d (t! homerowl d lsft $ht)
@@ -52,6 +53,9 @@
   k (t! homerowr k rsft $ht)
   l (t! homerowr l ralt $ht)
   ; (t! homerowr (tap-dance 100 (; sldr)) rmet $hts)
+  v (tap-hold $tt $hts v (layer-while-held vim-n))
+  m (tap-hold $tt $hts m (layer-while-held med))
+
   lsft (tap-dance $tt (lsft @cwt))
   rsft (tap-dance $tt (rsft @cwt))
 )
@@ -61,7 +65,7 @@
   @rld    1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab     q    w    e    r    t    y    u    i  @v-io  p    [    ]    \
   @v-esc  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
-  @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
+  @lsft   z    x    c    @v   b    n    @m   ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
 
@@ -81,6 +85,15 @@
   @escbase _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
   @lsft    _    _    _    _    _    end  kp0  kp0  .    /    @rsft
   _        _    _              _              _    _    _
+)
+
+(deflayermap med
+  s    ◀◀
+  d    ▶▶
+  f    🔊
+  c    🔇
+  v    🔉
+  spc  ▶⏸
 )
 
 (include vim.kbd)
