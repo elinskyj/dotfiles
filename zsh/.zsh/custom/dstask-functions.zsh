@@ -3,7 +3,7 @@ dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
 due_date=$(date -d 'now + '$dstask_due_offset +%F)
 dstaskbin="$(which dstask)"
 
-task() {[[ $@ == "" ]] && $dstaskbin next || $dstaskbin "$@"}
+task() {[[ -z $@ ]] && $dstaskbin next || $dstaskbin "$@"}
 tasklist=$(task)
 
 task-add() {task add "$@" && task}
@@ -18,8 +18,8 @@ task-done() {taskwrap done "$@"}
 task-remove() {taskwrap remove "$@"}
 task-log() {task log "$@" && task}
 task-last() {jq 'sort_by(.created) | .[-1].id' <<<"$(task)"}
-task-projects() {[[ $@ == "" ]] && task show-projects || task project:"$@"}
-task-templates() {[[ $@ == "" ]] && task show-templates || task template "$@"}
+task-projects() {[[ -z $@ ]] && task show-projects || task project:"$@"}
+task-templates() {[[ -z $@ ]] && task show-templates || task template "$@"}
 task-tags() {
   local old_task_context=$(task context)
   task context none
@@ -84,7 +84,7 @@ taskwrap() {
   tasklist=$(task)
   shift
 
-  if [[ $# -eq 0 ]]; then
+  if [[ $# == 0 ]]; then
     case $subcommand in
       add-project)
         local defsearch=0
