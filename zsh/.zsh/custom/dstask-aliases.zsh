@@ -14,6 +14,15 @@ alias tp='task-projects'
 alias tt='task-templates'
 alias -g TL='$(task-last)'
 
+# show filtered tasks
+alias tso='task show-open'
+alias tsr='task show-resolved'
+alias tsa='task show-active'
+alias tsn='task show-next'
+alias tspa='task show-paused'
+alias tspr='task show-projects'
+alias tsu='task show-unorganised'
+
 # context
 alias tc='task-context'
 alias tcd='task-context-default'
