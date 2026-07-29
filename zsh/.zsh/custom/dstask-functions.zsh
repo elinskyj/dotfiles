@@ -5,6 +5,8 @@ dstask_due_offset='1 month' # due date cutoff for `tcdue` context filter
 due_date=$(date -d 'now + '$dstask_due_offset +%F)
 dstaskbin="$(which dstask)"
 
+source <($dstaskbin zsh-completion)
+
 task() {[[ -z $@ ]] && $dstaskbin next || $dstaskbin "$@"}
 tasklist=$(task)
 
