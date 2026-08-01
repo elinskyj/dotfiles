@@ -12,6 +12,7 @@ wallpaper_effects/
 # wallust generated files
 hyprland/.config/cava/config
 wallust-hyprland.conf
+wallust-hyprland.lua
 hyprland/.config/rofi/wallust/colors-rofi.rasi
 hyprland/.config/waybar/wallust/colors-waybar.css
 kitty-colors.conf
