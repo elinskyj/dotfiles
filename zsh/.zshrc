@@ -22,6 +22,8 @@ export BAT_THEME_LIGHT="ansi"
 export BAT_THEME_DARK="Visual Studio Dark+"
 export BAT_THEME="ansi"
 export PATH="$PATH:/snap/bin"
+export PATH="$PATH:/opt"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 ZSH_THEME="agnoster"
 
