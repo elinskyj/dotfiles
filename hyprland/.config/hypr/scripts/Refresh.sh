@@ -28,7 +28,7 @@ killall -SIGUSR2 waybar # added since wallust sometimes not applying
 ags -q && ags &
 
 # Wallust refresh
-${SCRIPTSDIR}/WallustSwww.sh &
+${SCRIPTSDIR}/Wallustawww.sh &
 
 # Kill waybar & swaync (yet again) # added since wallust sometimes not applying
 _ps2=(waybar swaync)

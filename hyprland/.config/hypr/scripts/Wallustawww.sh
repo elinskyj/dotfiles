@@ -2,8 +2,8 @@
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Wallust Colors for current wallpaper
 
-# Define the path to the swww cache directory
-cache_dir="$HOME/.cache/swww/"
+# Define the path to the awww cache directory
+cache_dir="$HOME/.cache/awww/0.12.1/"
 
 # Get a list of monitor outputs
 monitor_outputs=($(ls "$cache_dir"))
@@ -20,7 +20,7 @@ echo "$cache_file"
 # Check if the cache file exists for the current monitor output
 if [ -f "$cache_file" ]; then
   # Get the wallpaper path from the cache file
-  wallpaper_path=$(grep -v 'Lanczos3' "$cache_file" | head -n 1)
+  wallpaper_path="/$(cat "$cache_file" | cut -d '/' -f 2-)"
   echo "$wallpaper_path"
   # symlink the wallpaper to the location Rofi can access
   if ln -sf "$wallpaper_path" "$HOME/.config/rofi/.current_wallpaper"; then
