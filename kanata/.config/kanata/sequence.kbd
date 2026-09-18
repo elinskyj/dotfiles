@@ -41,3 +41,7 @@
 (t! seq ddd     (d d d)         (unicode …))
 (t! seq ...     (. . .)         (unicode …))
 (t! seq terro   (t e r r o)     (unicode ‽))
+
+;; conversions
+(t! seq in->ac  (i n 2 a)       (macro Digit1 . Digit5 Digit9 Digit4 e - Digit7))
+(t! seq ft->ac  (f t 2 a)       (macro Digit2 . Digit2 Digit9 Digit6 e - Digit5))
