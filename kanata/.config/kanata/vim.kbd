@@ -2,6 +2,7 @@
   lsvn (t! vim2base vim-n 30000)
   lsvv (t! vim2base vim-v 30000)
   lsvd (t! vim2base vim-d 30000)
+  lsvg (t! vim2base vim-g 30000)
   lsvc (t! vim2base vim-c 30000)
   lsvq (t! vim2base vim-q 30000)
   lsv@ (t! vim2base vim-@ 30000)
@@ -61,7 +62,7 @@
   v-no (t! action-sft @v_no @v_nO)
   v-na (t! action-sft @v_na @v_nA)
   v-ni (t! action-sft @v_ni @v_nI)
-  v-ng (tap-dance $tt ((t! action-sft XX @v_nG) @v_ng))
+  v-ng (t! action-sft (t! osr-lay vim-g 1000) @v_nG)
 )
 
 (defalias
@@ -107,6 +108,19 @@
   XX     @v-da  @v-ds  @v-dd  @v-df  XX     @v-dh  @v-dj  @v-dk  @v-dl  XX     XX    XX
   lsft   XX     XX     XX     XX     @v-db  XX     XX     XX     XX     XX     rsft
   lctl   lmet   lalt          XX                          ralt   rmet   rctl
+)
+
+(defalias
+  v-gg (t! action-sft @v_ng @v_nG)
+)
+
+(deflayer vim-g
+  @lsb
+  XX    XX    XX    XX    XX XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX    XX    @v-nw @v-ne XX XX    XX    XX    XX    XX    XX    XX    XX    XX
+  @lsvn @v-na XX    XX    XX @v-gg @v-nh @v-nj @v-nk @v-nl XX    XX    XX
+  XX    XX    XX    XX    XX @v-nb XX    XX    XX    XX    XX    XX
+  XX    XX    XX          XX             XX    XX    XX
 )
 
 (deflayer vim-v
