@@ -12,7 +12,7 @@
   v_ni @lsb
 
   v-n$ (unshift end)
-  v-n0 (unshift home)
+  v-n0  home
 
   v-nq (one-shot 1000 (layer-while-held vim-q))
   v-n@ (t! action-sft XX (t! osr-lay vim-@ 1000))
