@@ -35,7 +35,7 @@
   v-np C-v
 
   v_na (t! homerowl (t! action-i rght)  lmet $hts)
-  v_nA (t! homerowl (t! action-i @v-n$) lmet $hts)
+  v_nA (t! action-i @v-n$)
   v-ns (t! homerowl XX lalt $ht)
   v_nD (macro S-end $v-d-delay C-x)
   v_nd (t! osr-lay vim-d 10000)
@@ -93,15 +93,11 @@
   v-de (macro C-S-rght S-lft $v-d-delay C-x)
   v-dh (macro S-lft $v-d-delay C-x)
 
-  v-da (t! homerowl XX   lmet $hts)
-  v-ds (t! homerowl XX   lalt $ht)
   v-dd (t! homerowl @v_dd   lsft $ht)
-  v-df (t! homerowl XX   lctl $ht)
 
   v-dj (t! homerowr (macro S-down $v-d-delay C-x) rctl $ht)
   v-dk (t! homerowr (macro S-up $v-d-delay C-x) rsft $ht)
-  v-dl (t! homerowr @v-nx ralt $ht)
-  v-d; (t! homerowr XX   rmet $hts)
+  v-dl del
 
   v-db (macro C-S-lft $v-d-delay C-x)
 )
@@ -110,7 +106,7 @@
   @lsb
   XX     XX     XX     XX     @v-d4  XX     XX     XX     XX     XX     @v-d0  XX    XX    XX
   @lsvn  XX     @v-dw  @v-de  XX     XX     XX     XX     XX     XX     XX     XX    XX    XX
-  XX     @v-da  @v-ds  @v-dd  @v-df  XX     @v-dh  @v-dj  @v-dk  @v-dl  XX     XX    XX
+  XX     XX     XX     @v-dd  XX     XX     @v-dh  @v-dj  @v-dk  @v-dl  XX     XX    XX
   lsft   XX     XX     XX     XX     @v-db  XX     XX     XX     XX     XX     rsft
   lctl   lmet   lalt          XX                          ralt   rmet   rctl
 )
