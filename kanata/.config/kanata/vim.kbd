@@ -35,7 +35,6 @@
   v_nd (t! osr-lay vim-d 10000)
   v-nd (t! homerowl (t! action-sft @v_nd @v_nD) lsft $ht)
   v-nf (t! homerowl XX lctl $ht)
-  v_ng (multi ctl @v-n0)
   v_nG (multi ctl @v-n$)
 
   v-nh lft
@@ -111,7 +110,7 @@
 )
 
 (defalias
-  v-gg (t! action-sft @v_ng @v_nG)
+  v-gg (multi ctl @v-n0)
 )
 
 (deflayer vim-g
