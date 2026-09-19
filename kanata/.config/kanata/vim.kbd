@@ -65,7 +65,7 @@
 )
 
 (defalias
-  v_iCo (one-shot-release 1000 (layer-while-held vim-n))
+  v_iCo (t! osr-lay vim-n 1000)
   v-io (t! action-ctl-sft o (multi @v_iCo (one-shot-pause-processing 50) C-o) S-o)
 )
 
