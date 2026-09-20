@@ -67,7 +67,7 @@
   v-no (t! action-sft @v_no @v_nO)
   v-na (t! action-sft @v_na @v_nA)
   v-ni (t! action-sft @v_ni @v_nI)
-  v-ng (t! action-sft (t! osr-lay vim-g 1000) @v_nG)
+  v-ng (t! action-sft (t! osr-lay vim-g $os-time) @v_nG)
 )
 
 (defalias
