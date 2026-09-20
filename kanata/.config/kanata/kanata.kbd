@@ -52,7 +52,7 @@
   j (t! homerowr j rctl $ht)
   k (t! homerowr k rsft $ht)
   l (t! homerowr l ralt $ht)
-  ; (t! homerowr (tap-dance 100 (; sldr)) rmet $hts)
+  ; (t! homerowr (t! action-sft (tap-dance 100 (; sldr)) ;) rmet $hts)
   v (tap-hold $tt $hts v (layer-while-held vim-n))
   m (tap-hold $tt $hts m (layer-while-held med))
 
