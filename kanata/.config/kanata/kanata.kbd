@@ -53,8 +53,8 @@
   k (t! homerowr k rsft $ht)
   l (t! homerowr l ralt $ht)
   ; (t! homerowr (t! action-sft (tap-dance 100 (; sldr)) ;) rmet $hts)
-  v (tap-hold $tt $hts v (layer-while-held vim-n))
-  m (tap-hold $tt $hts m (layer-while-held med))
+  v (t! tap-layer v vim-n)
+  m (t! tap-layer m med)
 
   lsft (tap-dance $tt (lsft @cwt))
   rsft (tap-dance $tt (rsft @cwt))
