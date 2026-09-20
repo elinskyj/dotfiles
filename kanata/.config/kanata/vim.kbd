@@ -91,10 +91,10 @@
   v_dd (macro end S-home $v-d-delay C-x del)
   v-dw (macro C-S-rght $v-d-delay C-x)
   v-de (macro C-S-rght S-lft $v-d-delay C-x)
-  v-dh (macro S-lft $v-d-delay C-x)
 
   v-dd (t! homerowl @v_dd   lsft $ht)
 
+  v-dh bspc
   v-dj (t! homerowr (macro S-down $v-d-delay C-x) rctl $ht)
   v-dk (t! homerowr (macro S-up $v-d-delay C-x) rsft $ht)
   v-dl del
