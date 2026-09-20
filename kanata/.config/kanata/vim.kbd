@@ -1,80 +1,138 @@
+;; timeouts
 (defvar
   v-d-delay 50
   os-time 1000
   ls-time 30000
 )
 
+;; change to layer with timeout
 (defalias
+  ;; normal
   lsvn (t! vim2base vim-n $ls-time)
+  ;; visual
   lsvv (t! vim2base vim-v $ls-time)
+  ;; delete
   lsvd (t! vim2base vim-d $ls-time)
+  ;; go
   lsvg (t! vim2base vim-g $ls-time)
+  ;; change
   lsvc (t! vim2base vim-c $ls-time)
+  ;; record macro
   lsvq (t! vim2base vim-q $ls-time)
+  ;; replay macro
   lsv@ (t! vim2base vim-@ $ls-time)
 )
 
 (defalias
+  ;; layer-switch base (insert mode)
   v_ni @lsb
 
+  ;; end of line
   v-n$ (unshift end)
+  ;; start of line
   v-n0  home
 
-  v-nq (one-shot $os-time (layer-while-held vim-q))
-  v-n@ (t! action-sft XX (t! osr-lay vim-@ $os-time))
 
+  ;; record vim macros
+  v-nq (one-shot $os-time (layer-while-held vim-q))
+  ;; playback vim macros
+  v-n@ (t! action-sft XX (t! osr-lay vim-@ $os-time))
+  ;; start of next word
   v-nw C-rght
+  ;; end of word
   v-ne (macro rght C-rght lft)
+
+  ;; replace character or redo
   v-nCr C-y
   v_nr (multi del (t! osr-lay base $os-time))
   v-nr (t! action-ctl @v_nr @v-nCr)
+
+  ;; undo
   v-nu C-z
+  ;; insert at start of line
   v_nI (t! action-i @v-n0)
+  ;; insert line below
   v_no (t! action-i (macro @v-n$ ret))
+  ;; insert line above
   v_nO (t! action-i (macro @v-n0 ret (unshift up)))
+
+  ;; copy
   v-np C-v
 
+  ;; insert after character
   v_na (t! homerowl (t! action-i rght)  lmet $hts)
+  ;; insert at end of line
   v_nA (t! action-i @v-n$)
+  ;; hold for alt
   v-ns (t! homerowl XX lalt $ht)
+
+  ;; delete to end of line
   v_nD (macro S-end $v-d-delay C-x)
+  ;; vim delete mode
   v_nd (t! osr-lay vim-d 10000)
   v-nd (t! homerowl (t! action-sft @v_nd @v_nD) lsft $ht)
+
+  ;; hold for meta
   v-nf (t! homerowl XX lctl $ht)
+
+  ;; go to end of text
   v_nG (multi ctl @v-n$)
 
-  v-nh lft
+  ;; join current line with next
   v_nj (macro @v-n$ 100 del spc)
+
+  ;; left
+  v-nh lft
+  ;; press for down, + shift to join line, hold for ctrl
   v-nj (t! homerowr (t! action-sft down @v_nj) rctl $ht)
+  ;; press for up, hold for shift
   v-nk (t! homerowr up   rsft $ht)
+  ;; press for right, hold for alt
   v-nl (t! homerowr rght ralt $ht)
+  ;; hold for meta
   v-n; (t! homerowr XX   rmet $hts)
 
+  ;; delete next character
   v-nx (macro S-rght $v-d-delay C-x rght)
+
+  ;; vim change mode or change to end of line
   v-nc (t! action-sft (t! osr-lay vim-c $os-time) (t! action-i @v_nD))
 
+  ;; vim yank mode or yank to end of line
   v-ny XX
+
+  ;; vim visual mode
   v-nv @lsvv
+
+  ;; start of word
   v-nb C-left
   v-n/ XX
-
   v-n. rpt-any
 )
 
+;; base action | shifted action
 (defalias
+  ;; single tap esc, double tap switch to vim normal, hold for numpad
   v-esc (t! tap-layer (tap-dance 100 (esc @lsvn)) num)
+  ;; noop | go to end of line
   v-n4 (t! action-sft XX @v-n$)
+  ;; insert line | insert line above
   v-no (t! action-sft @v_no @v_nO)
+  ;; insert after character | insert at end of line
   v-na (t! action-sft @v_na @v_nA)
+  ;; insert before character | insert at start of line
   v-ni (t! action-sft @v_ni @v_nI)
+  ;; vim go mode | go to end of text
   v-ng (t! action-sft (t! osr-lay vim-g $os-time) @v_nG)
 )
 
 (defalias
+  ;; vim normal mode for one action
   v_iCo (t! osr-lay vim-n $os-time)
   v-io (t! action-ctl-sft o (multi @v_iCo (one-shot-pause-processing 50) C-o) S-o)
 )
 
+;; vim normal mode
 (deflayer vim-n
   @lsb
   grv      XX     @v-n@  XX     @v-n4  XX     XX     XX     XX     XX     @v-n0    -    =    bspc
@@ -85,23 +143,31 @@
 )
 
 (defalias
+  ;; delete to end of line
   v-d4 (t! action-sft XX (macro S-end $v-d-delay C-x))
+  ;; delete to start of line
   v-d0 (macro S-home $v-d-delay C-x)
-
+  ;; delete line
   v_dd (macro end S-home $v-d-delay C-x del)
+  ;; delete to start of next word
   v-dw (macro C-S-rght $v-d-delay C-x)
+  ;; delete to end of word
   v-de (macro C-S-rght S-lft $v-d-delay C-x)
-
+  ;; delete line on press, hold for shift
   v-dd (t! homerowl @v_dd   lsft $ht)
-
+  ;; delete previous character
   v-dh bspc
+  ;; delete down on press, hold for ctrl
   v-dj (t! homerowr (macro S-down $v-d-delay C-x) rctl $ht)
+  ;; delete up on press, hold for shift
   v-dk (t! homerowr (macro S-up $v-d-delay C-x) rsft $ht)
+  ;; delete next character
   v-dl del
-
+  ;; delete to start of word
   v-db (macro C-S-lft $v-d-delay C-x)
 )
 
+;; vim delete mode
 (deflayer vim-d
   @lsb
   XX     XX     XX     XX     @v-d4  XX     XX     XX     XX     XX     @v-d0  XX    XX    XX
@@ -112,9 +178,11 @@
 )
 
 (defalias
+  ;; go to start of text
   v-gg (multi ctl @v-n0)
 )
 
+;; vim go mode
 (deflayer vim-g
   @lsb
   XX    XX    XX    XX    XX XX    XX    XX    XX    XX    XX    XX    XX    XX
@@ -124,6 +192,7 @@
   XX    XX    XX          XX             XX    XX    XX
 )
 
+;; TODO vim visual mode
 (deflayer vim-v
   @capmod
   @rld     1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -134,18 +203,29 @@
 )
 
 (defalias
+  ;; change to end of line
   v-c4 (t! action-i @v-d4)
+  ;; change to start of line
   v-c0 (t! action-i @v-d0)
+  ;; change to start of next word
   v-cw (t! action-i @v-dw)
+  ;; change to end of word
   v-ce (t! action-i @v-de)
+  ;; change previous character
   v-ch (t! action-i @v-dh)
+  ;; change down on press, hold for ctrl
   v-cj (t! action-i @v-dj)
+  ;; change up on press, hold for shift
   v-ck (t! action-i @v-dk)
+  ;; change next character
   v-cl (t! action-i @v-dl)
+  ;; change line
   v-cc (t! action-i @v-dd)
+  ;; change to start of word
   v-cb (t! action-i @v-db)
 )
 
+;; vim change mode
 (deflayer vim-c
   @lsb
   XX     XX   XX    XX   @v-c4  XX     XX    XX     XX     XX   @v-c0  XX    XX    XX
@@ -155,6 +235,7 @@
   lctl  lmet lalt           XX            ralt rmet rctl
 )
 
+;; vim macros
 (defalias
   v-qq (dynamic-macro-record 65535)
   v-qw (dynamic-macro-record 65534)
@@ -211,6 +292,7 @@
   v-@m (dynamic-macro-play 65510)
 )
 
+;; vim record macro mode
 (deflayer vim-q
   @lsb
   XX  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX XX XX
@@ -220,6 +302,7 @@
   XX   XX   XX              XX             XX   XX   XX
 )
 
+;; vim replay macro mode
 (deflayer vim-@
   @lsb
   XX  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX XX XX
