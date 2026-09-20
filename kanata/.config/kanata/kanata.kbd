@@ -1,15 +1,3 @@
-(deftemplate homerowl (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $left-hand-keys)
-)
-
-(deftemplate homerowr (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time (multi $tap-action @tap) $hold-action $right-hand-keys)
-)
-
-(deftemplate tap-layer (tap-action layer)
-  (tap-hold $tt $ht $tap-action (layer-while-held $layer))
-)
-
 (defcfg
   process-unmapped-keys yes
   concurrent-tap-hold yes
@@ -44,41 +32,40 @@
 
 (defvirtualkeys
   to-base (layer-switch base)
-  to-vim (layer-switch vim)
 )
 
 (defalias
-  tap (multi
-    (layer-switch nomods)
-    (on-idle 20 tap-vkey to-base)
-  )
-
   lsn (layer-switch num)
   lsb (layer-switch base)
-  lsv (layer-switch vim)
+
+  cwt (caps-word-toggle 1000)
 
   rld (tap-hold $tt $ht grv lrld)
   escbase (multi esc (on-idle 20 tap-vkey to-base))
   escnum (t! tap-layer esc num)
   capmod (tap-hold $tt $ht caps (layer-switch nomods))
+
   a (t! homerowl a lmet $hts)
   s (t! homerowl s lalt $ht)
   d (t! homerowl d lsft $ht)
   f (t! homerowl f lctl $ht)
-  j (t! homerowr j lctl $ht)
-  k (t! homerowr k lsft $ht)
-  l (t! homerowr l lalt $ht)
-  ; (t! homerowr (tap-dance $tt (; sldr)) lmet $hts)
-  lsft (tap-dance $tt (lsft caps))
-  rsft (tap-dance $tt (rsft caps))
+  j (t! homerowr j rctl $ht)
+  k (t! homerowr k rsft $ht)
+  l (t! homerowr l ralt $ht)
+  ; (t! homerowr (tap-dance 100 (; sldr)) rmet $hts)
+  v (tap-hold $tt $hts v (layer-while-held vim-n))
+  m (tap-hold $tt $hts m (layer-while-held med))
+
+  lsft (tap-dance $tt (lsft @cwt))
+  rsft (tap-dance $tt (rsft @cwt))
 )
 
 (deflayer base
   @capmod
-  @rld     1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @escnum @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
-  @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
+  @rld    1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab     q    w    e    r    t    y    u    i  @v-io  p    [    ]    \
+  @v-esc  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
+  @lsft   z    x    c    @v   b    n    @m   ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
 )
 
@@ -96,9 +83,21 @@
   _        _    _    _    _    _    nlk  kp7  kp8  kp9  _    _    _    _
   _        _    _    _    _    _   @lsn  kp4  kp5  kp6  -    _    _    _
   @escbase _    _    _    _    _   home  kp1  kp2  kp3  +    _    _
-  @lsft    _    _    _  @lsv   _    end  kp0  kp0  .    /    @rsft
+  @lsft    _    _    _    _    _    end  kp0  kp0  .    /    @rsft
   _        _    _              _              _    _    _
+)
+
+(deflayermap med
+  s    ◀◀
+  d    ▶▶
+  f    🔊
+  c    🔇
+  v    🔉
+  spc  ▶⏸
 )
 
 (include vim.kbd)
 (include sequence.kbd)
+(include secretseq.kbd) ;; secret sequences e.g. email addresses
+(include macro.kbd)
+(include template.kbd)

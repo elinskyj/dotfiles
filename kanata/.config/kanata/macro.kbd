@@ -1,0 +1,11 @@
+;; record keystrokes to macro id # between 0 and 65535
+(t! seq dr0 (r 0) (dynamic-macro-record 0))
+(t! seq dr1 (r 1) (dynamic-macro-record 1))
+(t! seq dr2 (r 2) (dynamic-macro-record 2))
+(t! seq dr3 (r 3) (dynamic-macro-record 3))
+
+;; play back recorded keystrokes from macro id # between 0 and 65535
+(t! seq dp0 (p 0) (dynamic-macro-play 0))
+(t! seq dp1 (p 1) (dynamic-macro-play 1))
+(t! seq dp2 (p 2) (dynamic-macro-play 2))
+(t! seq dp3 (p 3) (dynamic-macro-play 3))

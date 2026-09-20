@@ -1,29 +1,318 @@
-(deftemplate homerowvl (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $left-hand-keys)
+;; timeouts
+(defvar
+  v-d-delay 50
+  os-time 1000
+  ls-time 30000
 )
 
-(deftemplate homerowvr (tap-action hold-action hold-time)
-  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $right-hand-keys)
-)
-
+;; change to layer with timeout
 (defalias
-  ve (multi ctl rght)
-  vw a
-  vi @lsb
-  vo (multi enter @lsb)
-  va (t! homerowvl (multi rght @lsb) lmet $hts)
-  vh lft
-  vj (t! homerowvr down lctl $ht)
-  vk (t! homerowvr up   lsft $ht)
-  vl (t! homerowvr rght lalt $ht)
-  vb (multi ctl lft)
+  ;; normal
+  lsvn (t! vim2base vim-n $ls-time)
+  ;; visual
+  lsvv (t! vim2base vim-v $ls-time)
+  ;; delete
+  lsvd (t! vim2base vim-d $ls-time)
+  ;; go
+  lsvg (t! vim2base vim-g $ls-time)
+  ;; change
+  lsvc (t! vim2base vim-c $ls-time)
+  ;; record macro
+  lsvq (t! vim2base vim-q $ls-time)
+  ;; replay macro
+  lsv@ (t! vim2base vim-@ $ls-time)
 )
 
-(deflayer vim
+;; motions
+(defalias
+  ;; end of line
+  v-n$ (unshift end)
+  ;; start of line
+  v-n0  home
+  ;; start of next word
+  v-nw C-rght
+  ;; end of word
+  v-ne (macro rght C-rght lft)
+  ;; start of word
+  v-nb C-left
+  ;; go to end of text
+  v_nG (multi ctl @v-n$)
+  ;; go to start of text
+  v-gg (multi ctl @v-n0)
+)
+
+;; misc actions
+(defalias
+  ;; undo
+  v-nu C-z
+  ;; copy
+  v-np C-v
+  ;; delete next character
+  v-nx (macro S-rght $v-d-delay C-x rght)
+  ;; join current line with next
+  v_nj (macro @v-n$ 100 del spc)
+  v-n/ XX
+  v-n. rpt-any
+  ;; vim normal mode for one action
+  v_iCo (t! osr-lay vim-n $os-time)
+  v-io (t! action-ctl-sft o (multi @v_iCo (one-shot-pause-processing 50) C-o) S-o)
+)
+
+;; homerow motions
+(defalias
+  ;; left
+  v-nh lft
+  ;; press for down, + shift to join line, hold for ctrl
+  v-nj (t! homerowr (t! action-sft down @v_nj) rctl $ht)
+  ;; press for up, hold for shift
+  v-nk (t! homerowr up   rsft $ht)
+  ;; press for right, hold for alt
+  v-nl (t! homerowr rght ralt $ht)
+)
+
+;; insert actions
+(defalias
+  ;; layer-switch base (insert mode)
+  v_ni @lsb
+  ;; insert at start of line
+  v_nI (t! action-i @v-n0)
+  ;; insert line below
+  v_no (t! action-i (macro @v-n$ ret))
+  ;; insert line above
+  v_nO (t! action-i (macro @v-n0 ret (unshift up)))
+  ;; insert after character
+  v_na (t! homerowl (t! action-i rght)  lmet $hts)
+  ;; insert at end of line
+  v_nA (t! action-i @v-n$)
+)
+
+;; vim mode actions
+(defalias
+  ;; record vim macros
+  v-nq (one-shot $os-time (layer-while-held vim-q))
+  ;; playback vim macros
+  v-n@ (t! action-sft XX (t! osr-lay vim-@ $os-time))
+
+  ;; replace character or redo
+  v-nCr C-y
+  v_nr (multi del (t! osr-lay base $os-time))
+  v-nr (t! action-ctl @v_nr @v-nCr)
+
+  ;; delete to end of line
+  v_nD (macro S-end $v-d-delay C-x)
+  ;; vim delete mode
+  v_nd (t! osr-lay vim-d 10000)
+  v-nd (t! homerowl (t! action-sft @v_nd @v_nD) lsft $ht)
+
+  ;; vim change mode or change to end of line
+  v-nc (t! action-sft (t! osr-lay vim-c $os-time) (t! action-i @v_nD))
+
+  ;; vim yank mode or yank to end of line
+  v-ny XX
+
+  ;; vim visual mode
+  v-nv @lsvv
+)
+
+;; homerow mods
+(defalias
+  ;; hold for alt
+  v-ns (t! homerowl XX lalt $ht)
+  ;; hold for meta
+  v-nf (t! homerowl XX lctl $ht)
+  ;; hold for meta
+  v-n; (t! homerowr XX   rmet $hts)
+)
+
+;; base action | shifted action
+(defalias
+  ;; single tap esc, double tap switch to vim normal, hold for numpad
+  v-esc (t! tap-layer (tap-dance 100 (esc @lsvn)) num)
+  ;; noop | go to end of line
+  v-n4 (t! action-sft XX @v-n$)
+  ;; insert line | insert line above
+  v-no (t! action-sft @v_no @v_nO)
+  ;; insert after character | insert at end of line
+  v-na (t! action-sft @v_na @v_nA)
+  ;; insert before character | insert at start of line
+  v-ni (t! action-sft @v_ni @v_nI)
+  ;; vim go mode | go to end of text
+  v-ng (t! action-sft (t! osr-lay vim-g $os-time) @v_nG)
+)
+
+;; delete actions
+(defalias
+  ;; delete to end of line
+  v-d4 (t! action-sft XX (macro S-end $v-d-delay C-x))
+  ;; delete to start of line
+  v-d0 (macro S-home $v-d-delay C-x)
+  ;; delete line
+  v_dd (macro end S-home $v-d-delay C-x del)
+  ;; delete to start of next word
+  v-dw (macro C-S-rght $v-d-delay C-x)
+  ;; delete to end of word
+  v-de (macro C-S-rght S-lft $v-d-delay C-x)
+  ;; delete line on press, hold for shift
+  v-dd (t! homerowl @v_dd   lsft $ht)
+  ;; delete previous character
+  v-dh bspc
+  ;; delete down on press, hold for ctrl
+  v-dj (t! homerowr (macro S-down $v-d-delay C-x) rctl $ht)
+  ;; delete up on press, hold for shift
+  v-dk (t! homerowr (macro S-up $v-d-delay C-x) rsft $ht)
+  ;; delete next character
+  v-dl del
+  ;; delete to start of word
+  v-db (macro C-S-lft $v-d-delay C-x)
+)
+
+;; change actions
+(defalias
+  ;; change to end of line
+  v-c4 (t! action-i @v-d4)
+  ;; change to start of line
+  v-c0 (t! action-i @v-d0)
+  ;; change to start of next word
+  v-cw (t! action-i @v-dw)
+  ;; change to end of word
+  v-ce (t! action-i @v-de)
+  ;; change previous character
+  v-ch (t! action-i @v-dh)
+  ;; change down on press, hold for ctrl
+  v-cj (t! action-i @v-dj)
+  ;; change up on press, hold for shift
+  v-ck (t! action-i @v-dk)
+  ;; change next character
+  v-cl (t! action-i @v-dl)
+  ;; change line
+  v-cc (t! action-i @v-dd)
+  ;; change to start of word
+  v-cb (t! action-i @v-db)
+)
+
+;; vim normal mode
+(deflayer vim-n
   @lsb
-  grv      1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab      q    @vw  @ve    r    t    y    u   @vi   o    p    [    ]    \
-  @escnum  @va  @s   @d   @f   g   @vh  @vj  @vk  @vl  @;   '    ret
-  @lsft    z    x    c    v   @vb   n    m    ,    .    /    @rsft
+  grv      XX     @v-n@  XX     @v-n4  XX     XX     XX     XX     XX     @v-n0    -    =    bspc
+  tab      @v-nq  @v-nw  @v-ne  @v-nr  XX     @v-ny  @v-nu  @v-ni  @v-no  @v-np    [    ]    \
+  @escnum  @v-na  @v-ns  @v-nd  @v-nf  @v-ng  @v-nh  @v-nj  @v-nk  @v-nl  @v-n;  '  ret
+  @lsft    XX     @v-nx  @v-nc  @v-nv  @v-nb  XX     XX     XX     @v-n.  @v-n/    @rsft
+  lctl     lmet   lalt           spc          ralt   rmet rctrl
+)
+
+;; vim delete mode
+(deflayer vim-d
+  @lsb
+  XX     XX     XX     XX     @v-d4  XX     XX     XX     XX     XX     @v-d0  XX    XX    XX
+  @lsvn  XX     @v-dw  @v-de  XX     XX     XX     XX     XX     XX     XX     XX    XX    XX
+  XX     XX     XX     @v-dd  XX     XX     @v-dh  @v-dj  @v-dk  @v-dl  XX     XX    XX
+  lsft   XX     XX     XX     XX     @v-db  XX     XX     XX     XX     XX     rsft
+  lctl   lmet   lalt          XX                          ralt   rmet   rctl
+)
+
+;; vim go mode
+(deflayer vim-g
+  @lsb
+  XX    XX    XX    XX    XX XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX    XX    @v-nw @v-ne XX XX    XX    XX    XX    XX    XX    XX    XX    XX
+  @lsvn @v-na XX    XX    XX @v-gg @v-nh @v-nj @v-nk @v-nl XX    XX    XX
+  XX    XX    XX    XX    XX @v-nb XX    XX    XX    XX    XX    XX
+  XX    XX    XX          XX             XX    XX    XX
+)
+
+;; TODO vim visual mode
+(deflayer vim-v
+  @capmod
+  @rld     1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @v-esc @v-na @v-ns @v-nd @v-nf g  h  @v-nj @v-nk @v-nl @v-n; '  ret
+  @lsft   z    x    c    v    b    n    m    ,    .    /    @rsft
   lctl lmet lalt           spc            ralt rmet rctrl
+)
+
+;; vim change mode
+(deflayer vim-c
+  @lsb
+  XX     XX   XX    XX   @v-c4  XX     XX    XX     XX     XX   @v-c0  XX    XX    XX
+  @lsvn  XX  @v-cw  @v-ce  XX   XX     XX    XX     XX     XX     XX   XX    XX    XX
+  XX     XX   XX    XX  XX   XX    @v-ch  @v-cj  @v-ck  @v-cl  XX   XX    XX
+  lsft   XX   XX   @v-cc     XX  @v-cb   XX    XX     XX     XX     XX   rsft
+  lctl  lmet lalt           XX            ralt rmet rctl
+)
+
+;; vim macros
+(defalias
+  v-qq (dynamic-macro-record 65535)
+  v-qw (dynamic-macro-record 65534)
+  v-qe (dynamic-macro-record 65533)
+  v-qr (dynamic-macro-record 65532)
+  v-qt (dynamic-macro-record 65531)
+  v-qy (dynamic-macro-record 65530)
+  v-qu (dynamic-macro-record 65529)
+  v-qi (dynamic-macro-record 65528)
+  v-qo (dynamic-macro-record 65527)
+  v-qp (dynamic-macro-record 65526)
+  v-qa (dynamic-macro-record 65525)
+  v-qs (dynamic-macro-record 65524)
+  v-qd (dynamic-macro-record 65523)
+  v-qf (dynamic-macro-record 65522)
+  v-qg (dynamic-macro-record 65521)
+  v-qh (dynamic-macro-record 65520)
+  v-qj (dynamic-macro-record 65519)
+  v-qk (dynamic-macro-record 65518)
+  v-ql (dynamic-macro-record 65517)
+  v-qz (dynamic-macro-record 65516)
+  v-qx (dynamic-macro-record 65515)
+  v-qc (dynamic-macro-record 65514)
+  v-qv (dynamic-macro-record 65513)
+  v-qb (dynamic-macro-record 65512)
+  v-qn (dynamic-macro-record 65511)
+  v-qm (dynamic-macro-record 65510)
+
+  v-@q (dynamic-macro-play 65535)
+  v-@w (dynamic-macro-play 65534)
+  v-@e (dynamic-macro-play 65533)
+  v-@r (dynamic-macro-play 65532)
+  v-@t (dynamic-macro-play 65531)
+  v-@y (dynamic-macro-play 65530)
+  v-@u (dynamic-macro-play 65529)
+  v-@i (dynamic-macro-play 65528)
+  v-@o (dynamic-macro-play 65527)
+  v-@p (dynamic-macro-play 65526)
+  v-@a (dynamic-macro-play 65525)
+  v-@s (dynamic-macro-play 65524)
+  v-@d (dynamic-macro-play 65523)
+  v-@f (dynamic-macro-play 65522)
+  v-@g (dynamic-macro-play 65521)
+  v-@h (dynamic-macro-play 65520)
+  v-@j (dynamic-macro-play 65519)
+  v-@k (dynamic-macro-play 65518)
+  v-@l (dynamic-macro-play 65517)
+  v-@z (dynamic-macro-play 65516)
+  v-@x (dynamic-macro-play 65515)
+  v-@c (dynamic-macro-play 65514)
+  v-@v (dynamic-macro-play 65513)
+  v-@b (dynamic-macro-play 65512)
+  v-@n (dynamic-macro-play 65511)
+  v-@m (dynamic-macro-play 65510)
+)
+
+;; vim record macro mode
+(deflayer vim-q
+  @lsb
+  XX  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX XX XX
+  XX  @v-qq @v-qw @v-qe @v-qr @v-qt @v-qy @v-qu @v-qi @v-qo @v-qp XX XX XX
+  XX  @v-qa @v-qs @v-qd @v-qf @v-qg @v-qh @v-qj @v-qk @v-ql XX    XX XX
+  XX  @v-qz @v-qx @v-qc @v-qv @v-qb @v-qn @v-qm XX  XX  XX  XX
+  XX   XX   XX              XX             XX   XX   XX
+)
+
+;; vim replay macro mode
+(deflayer vim-@
+  @lsb
+  XX  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX XX XX
+  XX  @v-@q @v-@w @v-@e @v-@r @v-@t @v-@y @v-@u @v-@i @v-@o @v-@p XX XX XX
+  XX  @v-@a @v-@s @v-@d @v-@f @v-@g @v-@h @v-@j @v-@k @v-@l XX    XX XX
+  XX  @v-@z @v-@x @v-@c @v-@v @v-@b @v-@n @v-@m XX  XX  XX  XX
+  XX   XX   XX              XX             XX   XX   XX
 )

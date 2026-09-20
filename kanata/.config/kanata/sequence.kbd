@@ -1,8 +1,3 @@
-(deftemplate seq (vkey inkey outaction)
-    (defvirtualkeys $vkey $outaction)
-    (defseq $vkey $inkey)
-)
-
 (t! seq en      (e n)           (unicode ‒))
 (t! seq em      (e m)           (unicode —))
 (t! seq pm      (p m)           (unicode ±))
@@ -12,6 +7,7 @@
 (t! seq degF    (f a h)         (macro (unicode °) S-f))
 (t! seq inf     (i n f)         (unicode ∞))
 (t! seq approx  (a p p r o x)   (unicode ≈))
+(t! seq approx2 (` =)           (unicode ≈))
 (t! seq neq     (n e q)         (unicode ≠))
 (t! seq leq     (l e q)         (unicode ≤))
 (t! seq geq     (g e q)         (unicode ≥))
@@ -43,4 +39,9 @@
 (t! seq Omega   (S-o m e g a)   (unicode Ω))
 (t! seq omega   (o m e g a)     (unicode ω))
 (t! seq ddd     (d d d)         (unicode …))
+(t! seq ...     (. . .)         (unicode …))
 (t! seq terro   (t e r r o)     (unicode ‽))
+
+;; conversions
+(t! seq in->ac  (i n 2 a)       (macro Digit1 . Digit5 Digit9 Digit4 e - Digit7))
+(t! seq ft->ac  (f t 2 a)       (macro Digit2 . Digit2 Digit9 Digit6 e - Digit5))

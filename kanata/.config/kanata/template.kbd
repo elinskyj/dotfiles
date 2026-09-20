@@ -1,0 +1,50 @@
+;; general
+(deftemplate homerowl (tap-action hold-action hold-time)
+  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $left-hand-keys)
+)
+
+(deftemplate homerowr (tap-action hold-action hold-time)
+  (tap-hold-release-keys $tt $hold-time $tap-action $hold-action $right-hand-keys)
+)
+
+(deftemplate tap-layer (tap-action layer)
+  (tap-hold $tt $ht $tap-action (layer-while-held $layer))
+)
+
+(deftemplate seq (vkey inkey outaction)
+    (defvirtualkeys $vkey $outaction)
+    (defseq $vkey $inkey)
+)
+
+;; vim related
+(deftemplate vim2base (layer timeout)
+  (multi (layer-switch $layer) (on-idle $timeout tap-vkey to-base))
+)
+
+(deftemplate action-i (action)
+  (multi $action @v_ni)
+)
+
+(deftemplate action-sft (action sft-action)
+  (fork $action $sft-action (lsft rsft))
+)
+
+(deftemplate action-ctl (action ctl-action)
+  (fork $action $ctl-action (lctl rctl))
+)
+
+(deftemplate action-ctl-sft (action ctl-action sft-action)
+  (switch
+    ((or (key-history lctl 1) (key-history rctl 1))) $ctl-action break
+    ((or (key-history lsft 1) (key-history rsft 1))) $sft-action break
+    () $action break
+  )
+)
+
+(deftemplate vis (action)
+  (multi lsft $action)
+)
+
+(deftemplate osr-lay (lay timeout)
+  (one-shot-release $timeout (layer-while-held $lay))
+)

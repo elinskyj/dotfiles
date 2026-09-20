@@ -1,0 +1,53 @@
+{
+	"New Layer": {
+		"scope": "kanata",
+		"prefix": "deflayer",
+		"body": [
+			"(deflayer ${1:layername}",
+				"\t${2:esc}",
+				"\t${3:grv}  ${4:1}    ${5:2}    ${6:3}    ${7:4}    ${8:5}    ${9:6}    ${10:7}    ${11:8}    ${12:9}    ${13:0}    ${14:-}    ${15:=}    ${16:bspc}",
+				"\t${17:tab}  ${18:q}    ${19:w}    ${20:e}    ${21:r}    ${22:t}    ${23:y}    ${24:u}    ${25:i}    ${27:o}    ${28:p}    ${29:[}    ${30:]}    ${31:\\\\}",
+				"\t${32:caps} ${33:a}    ${34:s}    ${35:d}    ${36:f}    ${37:g}    ${38:h}    ${39:j}    ${40:k}    ${41:l}    ${42:;}    ${43:'}    ${44:ret}",
+				"\t${45:lsft} ${46:z}    ${47:x}    ${48:c}    ${49:v}    ${50:b}    ${51:n}    ${52:m}    ${53:,}    ${54:.}    ${55:/}    ${56:rsft}",
+				"\t${57:lctl} ${58:lmet} ${59:lalt}           ${60:spc}            ${61:ralt} ${62:rmet} ${63:rctl}",
+			")",
+		],
+		"description": "Add a new layer definition to your kanata configuration."
+	},
+	"New Template": {
+		"scope": "kanata",
+		"prefix": "template",
+		"body": "(deftemplate ${1:name} (${2:inputs}) (${3:actions}))",
+		"description": "Add a new template definition to your kanata configuration."
+	},
+	"Sequence Template": {
+		"scope": "kanata",
+		"prefix": "sequence",
+		"body": "(t! seq ${1:vkey} (${2:s e q u e n c e}) ${3:action})",
+		"description": "Add a new sequence to your kanata configuration."
+	},
+	"Tap-layer Template": {
+		"scope": "kanata",
+		"prefix": "taplayer",
+		"body": "(t! tap-layer ${1:tap-action} ${2:layer})",
+		"description": "Add a tap-layer definition to your kanata configuration."
+	},
+	"Include File": {
+		"scope": "kanata",
+		"prefix": "include",
+		"body": "(include $1.kbd)",
+		"description": "Include additional kanata configuration files."
+	},
+	"Tap-dance": {
+		"scope": "kanata",
+		"prefix": "tapdance",
+		"body": "(tap-dance ${1:\\$tt} (${2:1-tap} ${3:2-tap}))",
+		"description": "Add a tap-dance to your kanata configuration",
+	},
+	"Tap-hold": {
+		"scope": "kanata",
+		"prefix": "taphold",
+		"body": "(tap-hold ${1:\\$tt} ${2:\\$ht} (${3:tap-action} ${4:hold-action}))",
+		"description": "Add a tap-hold to your kanata configuration",
+	},
+}
