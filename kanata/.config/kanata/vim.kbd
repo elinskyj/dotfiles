@@ -79,7 +79,7 @@
   ;; insert line below
   v_no (t! action-i (macro @v-n$ ret))
   ;; insert line above
-  v_nO (t! action-i (macro @v-n0 ret (unshift up)))
+  v_nO (t! action-i (macro (unshift home) ret (unshift up)))
   ;; insert after character
   v_na (t! homerowl (t! action-i rght)  lmet $hts)
   ;; insert at end of line
